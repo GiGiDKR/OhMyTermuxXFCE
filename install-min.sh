@@ -57,31 +57,6 @@ sed -i '81s/^#//' $HOME/.termux/termux.properties
 sed -i '128s/^#//' $HOME/.termux/termux.properties
 sed -i '160s/^#//' $HOME/.termux/termux.properties
 
-echo "
-# http://dotfiles.org/~jbromley/.Xresources
-background=#000010
-foreground=#ffffff
-cursor=#FF00FF
-
-color0=#000000
-color1=#9e1828
-color2=#aece92
-color3=#968a38
-color4=#414171
-color5=#963c59
-color6=#418179
-color7=#bebebe
-color8=#666666
-color9=#cf6171
-color10=#c5f779
-color11=#fff796
-color12=#4186be
-color13=#cf9ebe
-color14=#71bebe
-color15=#ffffff
-
-" > $HOME/.termux/colors.properties
-
 if [ -f "/data/user/0/com.termux/files/usr/etc/motd" ];then
 rm /data/user/0/com.termux/files/usr/etc/motd;
 else
@@ -112,8 +87,8 @@ mkdir -p Downloads
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce-min.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot-min.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/themeselector.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/electron.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh
 chmod +x *.sh
 
 
