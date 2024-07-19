@@ -13,72 +13,72 @@ chmod +x $HOME/Desktop/firefox.desktop
 
 #Set aliases
 echo "
+alias ls='eza -lF --icons'
+alias l='eza -1 --icons'
+alias la='eza -lF -a --icons'
+alias ll='eza -T --icons'
+alias dir='eza -lF --icons'
+alias ..='cd ..'
+alias q='exit'
+alias c='clear'
+alias md='mkdir'
+alias setalias='nano $PREFIX/etc/bash.bashrc'
 alias debian='proot-distro login debian --user $username --shared-tmp'
 #alias zrun='proot-distro login debian --user $username --shared-tmp -- env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform '
 #alias zrunhud='proot-distro login debian --user $username --shared-tmp -- env DISPLAY=:1.0 MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform GALLIUM_HUD=fps '
 alias hud='GALLIUM_HUD=fps '
-alias ls='eza -lF --icons'
 alias cat='bat '
 alias apt='nala '
 alias install='nala install -y '
 alias uninstall='nala remove -y '
+alias update='nala update'
+alias upgrade='nala upgrade -y'
 alias search='nala search '
 alias list='nala list --upgradeable'
 alias show='nala show'
 " >> $PREFIX/etc/bash.bashrc
 
 #Download Wallpaper
-wget https://raw.githubusercontent.com/phoenixbyrd/Termux_XFCE/main/peakpx.jpg
-wget https://raw.githubusercontent.com/phoenixbyrd/Termux_XFCE/main/dark_waves.png
-mv peakpx.jpg $PREFIX/share/backgrounds/xfce/
-mv dark_waves.png $PREFIX/share/backgrounds/xfce/
+wget https://raw.githubusercontent.com/GiGIDKR/Termux_XFCE/main/mac_waves.png
+mv mac_waves.png $PREFIX/share/backgrounds/xfce/
 
-#Install WhiteSur-Dark Theme
-wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2023-04-26.zip
-unzip 2023-04-26.zip
-tar -xf WhiteSur-gtk-theme-2023-04-26/release/WhiteSur-Dark-44-0.tar.xz
+# Install WhiteSur-Dark Theme
+wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2024-05-01.zip
+unzip 2024-05-01.zip
+tar -xf WhiteSur-gtk-theme-2024-05-01/release/WhiteSur-Dark.tar.xz
 mv WhiteSur-Dark/ $PREFIX/share/themes/
 rm -rf WhiteSur*
-rm 2023-04-26.zip
+rm 2024-05-01.zip
 
-#Install Fluent Cursor Icon Theme
-wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2023-02-01.zip
-unzip 2023-02-01.zip
-mv Fluent-icon-theme-2023-02-01/cursors/dist $PREFIX/share/icons/ 
-mv Fluent-icon-theme-2023-02-01/cursors/dist-dark $PREFIX/share/icons/
-rm -rf $HOME//Fluent*
-rm 2023-02-01.zip
+# Install Fluent Cursor Icon Theme
+wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2024-02-25.zip
+unzip 2024-02-25.zip
+mv Fluent-icon-theme-2024-02-25/cursors/dist $PREFIX/share/icons/ 
+mv Fluent-icon-theme-2024-02-25/cursors/dist-dark $PREFIX/share/icons/
+rm -rf $HOME/Fluent*
+rm 2024-02-25.zip
 
-#Setup Fonts
-wget https://github.com/microsoft/cascadia-code/releases/download/v2111.01/CascadiaCode-2111.01.zip
-mkdir .fonts 
-unzip CascadiaCode-2111.01.zip
-mv otf/static/* .fonts/ && rm -rf otf
-mv ttf/* .fonts/ && rm -rf ttf/
-rm -rf woff2/ && rm -rf CascadiaCode-2111.01.zip
-
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip
-unzip Meslo.zip
-mv *.ttf .fonts/
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/Meslo.zip
+unzip Meslo.zip -d $HOME/.fonts/
 rm Meslo.zip
-rm LICENSE.txt
-rm readme.md
+rm $HOME/.fonts/LICENSE.txt
+rm $HOME/.fonts/README.md
 
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/NotoColorEmoji-Regular.ttf
+wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/NotoColorEmoji-Regular.ttf
 mv NotoColorEmoji-Regular.ttf .fonts
 
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/font.ttf
+wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/font.ttf
 mv font.ttf .termux/font.ttf
 
 #Setup Fancybash Termux
-wget https://raw.githubusercontent.com/phoenixbyrd/Termux_XFCE/main/fancybash.sh
+wget https://raw.githubusercontent.com/GiGIDKR/Termux_XFCE/main/fancybash.sh
 mv fancybash.sh .fancybash.sh
 echo "source $HOME/.fancybash.sh" >> $PREFIX/etc/bash.bashrc
 sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
 
 #Autostart Conky and Flameshot
-wget https://github.com/phoenixbyrd/Termux_XFCE/raw/main/config.tar.gz
+wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.tar.gz
 tar -xvzf config.tar.gz
 rm config.tar.gz
 chmod +x .config/autostart/conky.desktop

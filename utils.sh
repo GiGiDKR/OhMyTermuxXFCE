@@ -95,7 +95,7 @@ cat <<'EOF' > "$PREFIX/bin/app-installer"
 
 # Define the directory paths
 INSTALLER_DIR="$HOME/.App-Installer"
-REPO_URL="https://github.com/phoenixbyrd/App-Installer.git"
+REPO_URL="https://github.com/GiGIDKR/App-Installer.git"
 DESKTOP_DIR="$HOME/Desktop"
 APP_DESKTOP_FILE="$DESKTOP_DIR/app-installer.desktop"
 
@@ -191,7 +191,7 @@ chmod +x start
 mv start $PREFIX/bin
 
 #Shutdown Utility
-cat <<'EOF' > $PREFIX/bin/kill_termux_x11
+cat <<'EOF' > $PREFIX/bin/stop
 #!/bin/bash
 
 # Check if Apt, dpkg, or Nala is running in Termux or Proot
@@ -226,15 +226,15 @@ exit 0
 
 EOF
 
-chmod +x $PREFIX/bin/kill_termux_x11
+chmod +x $PREFIX/bin/stop
 
 #Create kill_termux_x11.desktop
 echo "[Desktop Entry]
 Version=1.0
 Type=Application
-Name=Kill Termux X11
+Name=Stop Termux X11
 Comment=
-Exec=kill_termux_x11
+Exec=stop
 Icon=system-shutdown
 Categories=System;
 Path=
