@@ -13,23 +13,15 @@ To install run this command in termux
 ```
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -o install.sh && chmod +x install.sh && ./install.sh
 ```
-&nbsp;
 
+To install minimal mode
 
-Join the Discord for any questions, help, suggestions, etc. [https://discord.gg/pNMVrZu5dm](https://discord.gg/pNMVrZu5dm)  
-
-&nbsp;
-
-![Desktop Screenshot](desktop.png)
-  
-  
-# Use Case
-  
-This is is how I personally use Termux on my Galaxy Fold 3, script was created mainly for personal use but also for others if they wanted to try out my setup. This is my daily driver used with a 15 inch Lepow portable monitor and bluetooth keyboard and mouse. This is mainly intended to be used as a PC/Laptop replacement connected to a monitor, keyboard and mouse and used as you would with any PC/Laptop. I run this on my Samsung Galaxy Fold 3.
-
-![My Samsung Galaxy Fold 3 - Dex Setup](desk.jpg)  
+```
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +xinstall-min.sh && ./install-min.sh
+```
 
 &nbsp;
+
 
 # Starting the desktop
 
