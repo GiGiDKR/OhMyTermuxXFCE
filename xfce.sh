@@ -13,10 +13,12 @@ chmod +x $HOME/Desktop/firefox.desktop
 
 #Set aliases
 echo "
-alias ls='eza -lF --icons'
-alias l='eza -1 --icons'
-alias la='eza -lF -a --icons'
-alias ll='eza -T --icons'
+alias l="eza -1 --icons"
+alias ls="eza --icons"
+alias ll="eza -lF -a  --icons --total-size  --no-permissions  --no-time --no-user"
+alias la="eza --icons -lgha --group-directories-first"
+alias lt="eza --icons --tree"
+alias lta="eza --icons --tree -lgha"
 alias dir='eza -lF --icons'
 alias ..='cd ..'
 alias q='exit'

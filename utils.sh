@@ -226,15 +226,15 @@ exit 0
 
 EOF
 
-chmod +x $PREFIX/bin/stop
+chmod +x $PREFIX/bin/kill_termux_x11
 
 #Create kill_termux_x11.desktop
 echo "[Desktop Entry]
 Version=1.0
 Type=Application
-Name=Stop Termux X11
+Name=Kill Termux X11
 Comment=
-Exec=stop
+Exec=kill_termux_x11
 Icon=system-shutdown
 Categories=System;
 Path=
