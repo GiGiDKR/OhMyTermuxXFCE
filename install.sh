@@ -107,15 +107,16 @@ pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 
 mkdir -p Desktop
 mkdir -p Downloads
-
+mkdir -p Scripts
 
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh
-chmod +x *.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh $HOME/Scripts
 
+chmod +x *.sh
+chmod +x $HOME/Scripts/*.sh
 
 ./xfce.sh "$username"
 ./proot.sh "$username"
