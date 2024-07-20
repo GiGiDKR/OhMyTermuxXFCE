@@ -112,8 +112,11 @@ mkdir -p Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh && mv themeselector.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh && mv electron.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyzsh.sh && mv ohmyzsh.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup.sh && mv xrdp-setup.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup-termux.sh && mv xrdp-setup-termux.sh $HOME/Scripts
 
 chmod +x *.sh
 chmod +x $HOME/Scripts/*.sh
@@ -126,10 +129,12 @@ clear -x
 echo ""
 echo "Installation de Termux-X11 APK" 
 echo ""
-read -n 1 -s -r -p "  Appuyez sur n'importe quelle touche pour continuer..."
-wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
-mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
-termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
+read -n 1 -s -r -p "  Voulez-vus installer Termux-X11 ? (o/n) " termux_x11
+if [[ $termux_x11 =~ ^[Oo]$ ]]; then
+	wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
+    mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
+    termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
+fi
 
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
@@ -143,14 +148,18 @@ echo ""
 echo "  Pour lancer XFCE4, saisissez :               start"
 echo "  Pour accéder à DEBIAN saisissez :           debian"
 echo ""
-echo "  Pour modifier le thème XFCE4 :          ./theme.sh"
-echo "  Pour changer le thème Termux:   ./themeselector.sh"
-echo "  Pour installer Electron :            ./electron.sh"
+echo "  Pour modifier le thème XFCE4 :          sh Scripts/theme.sh"
+echo "  Pour changer le thème Termux:   sh Scripts/themeselector.sh"
+echo "  Pour installer Electron :            sh Scripts/electron.sh"
+echo ""
+echo "  Pour installer xRDP Termux : sh Scripts/xrdp-setup-termux.sh"
+echo "  Pour installer xRDP Debian :       sh Scripts/xrdp-setup.sh"
 echo ""
 echo " █████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗"
 echo " ╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝"
 echo ""
 
+rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
 rm xfce.sh
 rm proot.sh
 rm utils.sh
