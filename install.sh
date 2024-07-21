@@ -83,15 +83,15 @@ color15=#ffffff
 " > $HOME/.termux/colors.properties
 
 if [ -f "/data/user/0/com.termux/files/usr/etc/motd" ];then
-rm /data/user/0/com.termux/files/usr/etc/motd;
+mv /data/user/0/com.termux/files/usr/etc/motd /data/user/0/com.termux/files/usr/etc/motd.bak;
 else
-echo "Le fichier motd n'existe pas.!"
+echo "  Le fichier motd n'existe pas !"
 fi
 
 clear -x
 banner
 echo ""
-echo "  Configuration de l'accès au stockage de Termux." 
+echo "  Configuration de l'accès au stockage externe." 
 echo ""
 read -n 1 -s -r -p "  Appuyez sur n'importe quelle touche pour continuer..."
 termux-setup-storage
@@ -105,10 +105,18 @@ pkg uninstall dbus -y
 pkg update
 pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 
-mkdir -p Desktop
-mkdir -p Downloads
-mkdir -p Music
-mkdir -p Scripts
+clear -x
+banner
+echo ""
+echo "  Création des répertoires utilisateur..."
+mkdir $HOME/Desktop
+mkdir $HOME/Downloads
+mkdir $HOMES/Scripts
+mkdir $HOME/Pictures
+mkdir $HOME/Videos
+ln -s $HOME/storage/music Music 
+ln -s $HOME/storage/documents Documents 
+
 
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
@@ -131,7 +139,7 @@ clear -x
 echo ""
 echo "Installation de Termux-X11 APK" 
 echo ""
-read -n 1 -s -r -p "  Voulez-vus installer Termux-X11 ? (o/n) " termux_x11
+read -n 1 -s -r -p "  Voulez-vous installer Termux-X11 ? (o/n) " termux_x11
 if [[ $termux_x11 =~ ^[Oo]$ ]]; then
 	wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
     mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
