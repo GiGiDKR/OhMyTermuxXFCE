@@ -58,15 +58,15 @@ sed -i '128s/^#//' $HOME/.termux/termux.properties
 sed -i '160s/^#//' $HOME/.termux/termux.properties
 
 if [ -f "/data/user/0/com.termux/files/usr/etc/motd" ];then
-rm /data/user/0/com.termux/files/usr/etc/motd;
+mv /data/user/0/com.termux/files/usr/etc/motd /data/user/0/com.termux/files/usr/etc/motd.bak;
 else
-echo "Le fichier motd n'existe pas.!"
+echo "  Le fichier motd n'existe pas !"
 fi
 
 clear -x
 banner
 echo ""
-echo "  Configuration de l'accès au stockage de Termux." 
+echo "  Configuration de l'accès au stockage externe." 
 echo ""
 read -n 1 -s -r -p "  Appuyez sur n'importe quelle touche pour continuer..."
 termux-setup-storage
@@ -80,10 +80,17 @@ pkg uninstall dbus -y
 pkg update
 pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 
-mkdir -p Desktop
-mkdir -p Downloads
-mkdir -p Music
-mkdir -p Scripts
+clear -x
+banner
+echo ""
+echo "  Création des répertoires utilisateur..."
+mkdir $HOME/Desktop
+mkdir $HOME/Downloads
+mkdir $HOMES/Scripts
+mkdir $HOME/Pictures
+mkdir $HOME/Videos
+ln -s $HOME/storage/music Music 
+ln -s $HOME/storage/documents Documents 
 
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
