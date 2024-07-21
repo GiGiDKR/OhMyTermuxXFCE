@@ -1,8 +1,8 @@
 #!/bin/bash
 
-## Author GiGiDKR
-## Date 21/07/2024
-## Rev 1.0.0
+## Author : GiGiDKR
+## Date   : 21/07/2024
+## Rev    : 1.0.0
 
 clear
 
