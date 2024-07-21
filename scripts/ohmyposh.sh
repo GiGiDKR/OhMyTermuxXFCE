@@ -4,6 +4,8 @@
 ## Date   : 21/07/2024
 ## Rev    : 1.0.0
 
+## A script to install oh-my-posh with a Nerd Font on Termux
+
 clear
 
 pkg update -y
