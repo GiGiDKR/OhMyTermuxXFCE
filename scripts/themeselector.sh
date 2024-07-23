@@ -1,6 +1,6 @@
 #!/bin/bash
 
- THEMES_DIR="$HOME/.termux/themes/Color Schemes/Termux"
+ THEMES_DIR="$HOME/.termux/themes/Termux"
  TERMUX_COLORS="$HOME/.termux/colors.properties" 
  BACKUP_COLORS="$HOME/.termux/colors.properties.backup" 
 
@@ -39,9 +39,9 @@ banner() {
 
 mkdir -p $HOME/.termux/themes
 cd $HOME/.termux/themes
-wget https://github.com/GiGiDKR/Termux_XFCE/main/files/ColorSchemes.tar
-tar -xf ColorSchemes.tar
-rm ColorSchemes.tar
+wget https://github.com/GiGiDKR/Termux_XFCE/main/files/Termux.tar
+tar -xf Termux.tar
+rm Termux.tar
 
 banner 
 
