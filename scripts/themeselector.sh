@@ -39,9 +39,9 @@ banner() {
 
 mkdir -p "$HOME/.termux/themes"
 cd "$HOME/.termux/themes"
-wget -O termux.tar https://github.com/GiGiDKR/Termux_XFCE/blob/main/files/termux.tar?raw=true
-tar -xf termux.tar
-rm termux.tar
+wget -O termux.zip https://github.com/GiGiDKR/Termux_XFCE/blob/main/files/termux.zip?raw=true
+unzip termux.zip
+rm termux.zip
 
 banner
 
