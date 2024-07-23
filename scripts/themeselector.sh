@@ -39,7 +39,7 @@ banner() {
 
 mkdir -p $HOME/.termux/themes
 cd $HOME/.termux/themes
-wget https://github.com/GiGiDKR/Termux_XFCE/main/files/Termux.tar
+wgethttps://github.com/GiGiDKR/Termux_XFCE/blob/main/files/termux.tar
 tar -xf Termux.tar
 rm Termux.tar
 
