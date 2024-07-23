@@ -38,7 +38,8 @@ banner() {
 }
 
 mkdir -p $HOME/.termux/themes
-git clone
+wget https://github.com/GiGiDKR/Termux_XFCE/main/files/Color%20Schemes.tar $HOME/scripts
+tar -xf 
 
 banner 
 
