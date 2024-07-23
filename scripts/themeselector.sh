@@ -1,6 +1,6 @@
 #!/bin/bash
 
- THEMES_DIR="$HOME//.termux"  
+ THEMES_DIR="$HOME/.termux/themes  
  TERMUX_COLORS="$HOME/.termux/colors.properties" 
  BACKUP_COLORS="$HOME/.termux/colors.properties.backup" 
 
@@ -36,6 +36,9 @@ banner() {
     echo ""
 	echo ""
 }
+
+mkdir -p $HOME/.termux/themes
+git clone
 
 banner 
 
