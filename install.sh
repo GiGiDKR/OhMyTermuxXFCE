@@ -111,7 +111,7 @@ echo ""
 echo "  Création des répertoires utilisateur..."
 mkdir $HOME/Desktop
 mkdir $HOME/Downloads
-mkdir $HOMES/Scripts
+mkdir $HOME/Scripts
 mkdir $HOME/Pictures
 mkdir $HOME/Videos
 ln -s $HOME/storage/music Music 
