@@ -42,12 +42,12 @@ echo "export DISPLAY=:1.0" >> $PREFIX/var/lib/proot-distro/installed-rootfs/debi
 echo "
 alias zink='MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform '
 alias hud='GALLIUM_HUD=fps '
-alias l="eza -1 --icons"
-alias ls="eza --icons"
-alias ll="eza -lF -a  --icons --total-size  --no-permissions  --no-time --no-user"
-alias la="eza --icons -lgha --group-directories-first"
-alias lt="eza --icons --tree"
-alias lta="eza --icons --tree -lgha"
+alias l='eza -1 --icons'
+alias ls='eza --icons'
+alias ll='eza -lF -a  --icons --total-size  --no-permissions  --no-time --no-user'
+alias la='eza --icons -lgha --group-directories-first'
+alias lt='eza --icons --tree'
+alias lta='eza --icons --tree -lgha'
 alias dir='eza -lF --icons'
 alias ..='cd ..'
 alias q='exit'
