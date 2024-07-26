@@ -17,7 +17,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 To install minimal mode
 
 ```
-curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +xinstall-min.sh && ./install-min.sh
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +x install-min.sh && ./install-min.sh
 ```
 
 &nbsp;
