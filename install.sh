@@ -52,8 +52,8 @@ pkg update -y -o Dpkg::Options::="--force-confold"
 pkg upgrade -y -o Dpkg::Options::="--force-confold"
 
 sed -i '21s/^#//' $HOME/.termux/termux.properties
-sed -i '80s/^#//' $HOME/.termux/termux.properties
-sed -i '81s/^#//' $HOME/.termux/termux.properties
+#.sed -i '80s/^#//' $HOME/.termux/termux.properties
+#sed -i '81s/^#//' $HOME/.termux/termux.properties
 sed -i '128s/^#//' $HOME/.termux/termux.properties
 sed -i '160s/^#//' $HOME/.termux/termux.properties
 
