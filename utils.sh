@@ -191,7 +191,7 @@ chmod +x start
 mv start $PREFIX/bin
 
 #Shutdown Utility
-cat <<'EOF' > $PREFIX/bin/stop
+cat <<'EOF' > $PREFIX/bin/kill_termux_x11
 #!/bin/bash
 
 # Check if Apt, dpkg, or Nala is running in Termux or Proot
@@ -234,7 +234,7 @@ Version=1.0
 Type=Application
 Name=Kill Termux X11
 Comment=
-Exec=stop
+Exec=kill_termux_x11
 Icon=system-shutdown
 Categories=System;
 Path=
