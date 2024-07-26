@@ -102,6 +102,7 @@ wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyzsh.sh && mv oh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyposh.sh && mv ohmyposh.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup.sh && mv xrdp-setup.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup-termux.sh && mv xrdp-setup-termux.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/debianpowershell.sh && mv debianpowershell.sh $HOME/Scripts
 
 chmod +x *.sh
 chmod +x $HOME/Scripts/*.sh
@@ -120,10 +121,16 @@ if [[ $termux_x11 =~ ^[Oo]$ ]]; then
 	wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
     mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
     termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
+    rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
 fi
 
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
+
+rm xfce-min.sh
+rm proot-min.sh
+rm utils.sh
+rm install-min.sh
 
 clear -x
 banner
@@ -139,6 +146,7 @@ echo "  Pour installer oh-my-zsh :      sh Scripts/ohmyzsh.sh"
 echo "  Pour installer oh-my-posh :    sh Scripts/ohmyposh.sh"
 echo ""
 echo "  Pour installer Electron :      sh Scripts/electron.sh"
+echo "  Pour PowerShell :      sh Scripts/debianpowershell.sh"
 echo ""
 echo "  Pour  xRDP Termux :   sh Scripts/xrdp-setup-termux.sh"
 echo "  Pour  xRDP Debian :          sh Scripts/xrdp-setup.sh"
@@ -146,9 +154,3 @@ echo ""
 echo " █████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗"
 echo " ╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝"
 echo ""
-
-rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
-rm xfce-min.sh
-rm proot-min.sh
-rm utils.sh
-rm install-min.sh
