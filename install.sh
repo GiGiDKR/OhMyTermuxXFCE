@@ -144,10 +144,16 @@ if [[ $termux_x11 =~ ^[Oo]$ ]]; then
 	wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
     mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
     termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
+    rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
 fi
 
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
+
+rm xfce.sh
+rm proot.sh
+rm utils.sh
+rm install.sh
 
 clear -x
 banner
@@ -169,9 +175,3 @@ echo ""
 echo " █████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗"
 echo " ╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝"
 echo ""
-
-rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
-rm xfce.sh
-rm proot.sh
-rm utils.sh
-rm install.sh
