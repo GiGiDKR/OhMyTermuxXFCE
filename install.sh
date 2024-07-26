@@ -128,6 +128,7 @@ wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyposh.sh && mv o
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup.sh && mv xrdp-setup.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup-termux.sh && mv xrdp-setup-termux.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/debianpowershell.sh && mv debianpowershell.sh $HOME/Scripts
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/powershell.sh && mv powershell.sh $HOME/Scripts
 
 chmod +x *.sh
 chmod +x $HOME/Scripts/*.sh
@@ -169,7 +170,7 @@ echo "  Pour installer oh-my-zsh :      sh Scripts/ohmyzsh.sh"
 echo "  Pour installer oh-my-posh :    sh Scripts/ohmyposh.sh"
 echo ""
 echo "  Pour installer Electron :      sh Scripts/electron.sh"
-echo "  Pour PowerShell :      sh Scripts/debianpowershell.sh"
+echo "  Pour PowerShell :      sh Scripts/powershell.sh"
 echo ""
 echo "  Pour xRDP Termux :    sh Scripts/xrdp-setup-termux.sh"
 echo "  Pour xRDP Debian :           sh Scripts/xrdp-setup.sh"
