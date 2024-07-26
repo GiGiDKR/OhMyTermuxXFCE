@@ -92,8 +92,8 @@ mkdir $HOME/Videos
 ln -s $HOME/storage/music Music 
 ln -s $HOME/storage/documents Documents 
 
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce-min.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot-min.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/theme.sh && mv theme.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh && mv themeselector.sh $HOME/Scripts
