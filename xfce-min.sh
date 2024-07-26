@@ -55,9 +55,9 @@ echo "source $HOME/.fancybash.sh" >> $PREFIX/etc/bash.bashrc
 sed -i "326s/\\\u/$username/" $HOME/.fancybash.sh
 sed -i "327s/\\\h/termux/" $HOME/.fancybash.sh
 
-#Config
+#Autostart Conky and Flameshot
 wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.tar.gz
 tar -xvzf config.tar.gz
 rm config.tar.gz
-rm .config/autostart/conky.desktop
-rm .config/autostart/org.flameshot.Flameshot.desktop
+chmod +x .config/autostart/conky.desktop
+chmod +x .config/autostart/org.flameshot.Flameshot.desktop
