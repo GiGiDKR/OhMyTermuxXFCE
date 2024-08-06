@@ -84,17 +84,8 @@ mkdir $HOME/Desktop
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_zsh.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_zsh.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils_zsh.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh && mv themeselector.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh && mv electron.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyzsh.sh && mv ohmyzsh.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyposh.sh && mv ohmyposh.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup.sh && mv xrdp-setup.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/xrdp-setup-termux.sh && mv xrdp-setup-termux.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/debianpowershell.sh && mv debianpowershell.sh $HOME/Scripts
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/powershell.sh && mv powershell.sh $HOME/Scripts
 
 chmod +x *.sh
-chmod +x $HOME/Scripts/*.sh
 
 ./xfce_zsh.sh "$username"
 ./proot_zsh.sh "$username"
