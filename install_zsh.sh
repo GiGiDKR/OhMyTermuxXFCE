@@ -81,9 +81,9 @@ echo ""
 echo "  Création des répertoires utilisateur..."
 mkdir $HOME/Desktop
 
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_zsh.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_zsh.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils_zsh.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/themeselector.sh && mv themeselector.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/electron.sh && mv electron.sh $HOME/Scripts
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/ohmyzsh.sh && mv ohmyzsh.sh $HOME/Scripts
@@ -96,9 +96,9 @@ wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/scripts/powershell.sh && mv
 chmod +x *.sh
 chmod +x $HOME/Scripts/*.sh
 
-./xfce.sh "$username"
-./proot.sh "$username"
-./utils.sh
+./xfce_zsh.sh "$username"
+./proot_zsh.sh "$username"
+./utils_zsh.sh
 
 clear -x
 echo ""
@@ -115,10 +115,10 @@ fi
 source $PREFIX/etc/zshrc
 termux-reload-settings
 
-rm xfce.sh
-rm proot.sh
-rm utils.sh
-rm install.sh
+rm xfce_zsh.sh
+rm proo_zsh.sh
+rm utils_zsh.sh
+rm install_zsh.sh
 
 clear -x
 banner
