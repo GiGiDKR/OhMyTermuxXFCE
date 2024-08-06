@@ -1,6 +1,6 @@
-#!/bin/zsh
+#!/bin/bash
 
-# Unofficial Zsh Strict Mode
+# Unofficial Bash Strict Mode
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -51,9 +51,8 @@ termux-change-repo
 pkg update -y -o Dpkg::Options::="--force-confold"
 pkg upgrade -y -o Dpkg::Options::="--force-confold"
 
-
-if [ -f "/data/user/0/com.termux/files/usr/etc/motd" ]; then
-  mv /data/user/0/com.termux/files/usr/etc/motd /data/user/0/com.termux/files/usr/etc/motd.bak
+if [ -f "/data/data/com.termux/files/usr/etc/motd" ]; then
+  mv /data/data/com.termux/files/usr/etc/motd /data/data/com.termux/files/usr/etc/motd.bak
 else
   echo "  Le fichier motd n'existe pas !"
 fi
@@ -79,7 +78,7 @@ clear -x
 banner
 echo ""
 echo "  Création des répertoires utilisateur..."
-mkdir $HOME/Desktop
+mkdir -p $HOME/Desktop
 
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_zsh.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_zsh.sh
@@ -103,11 +102,11 @@ if [[ $termux_x11 =~ ^[Oo]$ ]]; then
   rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
 fi
 
-source $PREFIX/etc/zshrc
+source $PREFIX/etc/profile.d/start-services.sh
 termux-reload-settings
 
 rm xfce_zsh.sh
-rm proo_zsh.sh
+rm proot_zsh.sh
 rm utils_zsh.sh
 rm install_zsh.sh
 
