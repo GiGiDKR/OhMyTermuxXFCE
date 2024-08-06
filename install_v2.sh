@@ -109,15 +109,15 @@ echo ""
 echo "  Création des répertoires utilisateur..."
 mkdir $HOME/Desktop
 
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce.sh
-wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_v2.sh
+wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_v2.sh
 wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
 
 chmod +x *.sh
 
 ./xfce_v2.sh "$username"
 ./proot_v2.sh "$username"
-./utils_v2.sh
+./utils.sh
 
 clear -x
 echo ""
@@ -136,19 +136,21 @@ termux-reload-settings
 
 rm xfce_v2.sh
 rm proot_v2.sh
-rm utils_v2.sh
+rm utils.sh
 rm install_v2.sh
 
 clear -x
 banner
 echo ""
-echo "                  Installation terminée !              "
+echo "                  Installation terminée !               "
 echo ""
-echo "  Pour lancer XFCE4, saisissez :                  start"
-echo "  Pour accéder à DEBIAN saisissez :              debian"
+echo "  Pour lancer XFCE4, saisissez :                   start"
+echo "  Pour accéder à DEBIAN saisissez :               debian"
 echo ""
-echo "  Pour lister les scripts, saisissez  : cd ~/Scripts && ls"
-echo " Pour exécuter un script, saisissez : ./nomduscript"
+echo "  Configuration avancée de Termux :"
+echo "  pkg update -y && pkg install git -y"
+echo "  git clone https://github.com/GiGiDKR/OhMyTermux.git"
+echo "  && cd OhMyTermux && chmod +x install.sh && ./install.sh"
 echo ""
 echo " █████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗█████╗"
 echo " ╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝"
