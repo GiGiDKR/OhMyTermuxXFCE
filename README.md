@@ -20,6 +20,10 @@ To install minimal mode
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +x install-min.sh && ./install-min.sh
 ```
 
+To install ZSH mode :
+```
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_zsh.sh -o install_zsh.sh && chmod +x install_zsh.sh && ./install_zsh.sh
+```
 &nbsp;
 
 
