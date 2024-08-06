@@ -69,8 +69,8 @@ rm $HOME/.fonts/README.md
 wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/NotoColorEmoji-Regular.ttf
 mv NotoColorEmoji-Regular.ttf $HOME/.fonts/
 
-wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/font.ttf
-mv font.ttf $HOME/.termux/font.ttf
+#wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/font.ttf
+#mv font.ttf $HOME/.termux/font.ttf
 
 # Autostart Conky et Flameshot
 wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.tar.gz
