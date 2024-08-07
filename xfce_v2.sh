@@ -62,4 +62,4 @@ rm 2024-02-25.zip
 # Config
 wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config_v2.tar.gz
 tar -xvzf config_v2.tar.gz
-rm config_v2.tar.gz
+rm config.tar.gz
