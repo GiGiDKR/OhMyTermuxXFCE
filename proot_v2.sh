@@ -77,8 +77,8 @@ Xcursor.theme: dist-dark
 EOF
 
 mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fonts/
-mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.themes
-/
+mkdir $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.themes/
+
 #Setup Hardware Acceleration
 pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb
 pd login debian --shared-tmp -- env DISPLAY=:1.0 sudo apt install -y ./mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb
