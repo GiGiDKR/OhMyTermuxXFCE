@@ -60,6 +60,6 @@ rm -rf $HOME/Fluent*
 rm 2024-02-25.zip
 
 # Config
-wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config_v2.tar.gz
-tar -xvzf config_v2.tar.gz
+wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.tar.gz
+tar -xvzf config.tar.gz
 rm config.tar.gz
