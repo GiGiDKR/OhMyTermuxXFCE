@@ -63,3 +63,6 @@ rm 2024-02-25.zip
 wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.tar.gz
 tar -xvzf config.tar.gz
 rm config.tar.gz
+
+wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/font.ttf
+mv font.ttf .termux/font.ttf
