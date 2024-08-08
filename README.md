@@ -20,7 +20,7 @@ To install minimal mode
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +x install-min.sh && ./install-min.sh
 ```
 
-To install v2 (for use with OhMyTermux) :
+To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux)) :
 ```
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_v2.sh -o install_v2.sh && chmod +x install_v2.sh && ./install_v2.sh
 ```
