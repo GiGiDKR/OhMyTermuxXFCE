@@ -103,15 +103,15 @@ echo ""
 echo "Création des répertoires utilisateur..."
 mkdir $HOME/Desktop
 
-gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_v2.sh
-gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_v2.sh
+gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_gum.sh
+gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_gum.h
 gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
 
 chmod +x *.sh
 
-gum spin --title "Exécution de xfce_v2.sh" -- ./xfce_v2.sh "$username"
-gum spin --title "Exécution de proot_v2.sh" -- ./proot_v2.sh "$username"
-gum spin --title "Exécution de utils.sh" -- ./utils.sh
+gum spin --title "Exécution du script xfce" -- ./xfce_gum.sh "$username"
+gum spin --title "Exécution du script proot" -- ./proot_gum.sh "$username"
+gum spin --title "Exécution du script utils" -- ./utils.sh
 
 clear -x
 echo ""
