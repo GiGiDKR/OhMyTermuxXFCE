@@ -69,10 +69,10 @@ rm -rf $HOME/Fluent*
 rm 2024-02-25.zip
 
 # Configuration
-gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.zip
+gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/config.zip
 unzip config.zip
 rm config.zip
 
 # Téléchargement de la police
-gum spin --title "Téléchargement de la police par défaut" -- wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/font.ttf
+gum spin --title "Téléchargement de la police par défaut" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/font.ttf
 mv font.ttf .termux/font.ttf
