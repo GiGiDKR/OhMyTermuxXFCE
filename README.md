@@ -1,4 +1,4 @@
-# Oh-My-Termux-XFCE
+# OhMyTermuxXFCE
 
 Sets up a termux XFCE desktop and a Debian proot install. This setup uses Termux-X11, the termux-x11 server will be installed and you will be prompted to allow termux to install the Android APK.
 
