@@ -40,7 +40,7 @@ alias show='nala show'
 " >> $PREFIX/etc/bash.bashrc
 
 #Download Wallpaper
-wget https://raw.githubusercontent.com/GiGIDKR/Termux_XFCE/main/mac_waves.png
+wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/mac_waves.png
 mv mac_waves.png $PREFIX/share/backgrounds/xfce/
 
 # Install WhiteSur-Dark Theme
@@ -60,9 +60,9 @@ rm -rf $HOME/Fluent*
 rm 2024-02-25.zip
 
 # Config
-wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/config.zip
+wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/config.zip
 unzip config.zip
 rm config.zip
 
-wget https://github.com/GiGIDKR/Termux_XFCE/raw/main/font.ttf
+wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/font.ttf
 mv font.ttf .termux/font.ttf
