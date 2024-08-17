@@ -71,9 +71,15 @@ gum spin --title "Mise à jour des dépôts" -- termux-change-repo
 gum spin --title "Mise à jour des paquets" -- pkg update -y -o Dpkg::Options::="--force-confold"
 gum spin --title "Mise à niveau des paquets" -- pkg upgrade -y -o Dpkg::Options::="--force-confold"
 
-sed -i '21s/^#//' $HOME/.termux/termux.properties
-sed -i '128s/^#//' $HOME/.termux/termux.properties
-sed -i '160s/^#//' $HOME/.termux/termux.properties
+file_path="$HOME/.termux/termux.properties"
+
+if [ ! -f "$file_path" ]; then
+  echo "Le fichier $file_path n'existe pas."
+fi
+sed -i 's/^#\(allow-external-apps = true\)/\1/' "$file_path"
+sed -i 's/^#\(use-black-ui = true\)/\1/' "$file_path"
+sed -i 's/^#\(bell-character = ignore\)/\1/' "$file_path"
+sed -i 's/^#\(fullscreen = true\)/\1/' "$file_path"
 
 if [ -f "/data/user/0/com.termux/files/usr/etc/motd" ];then
     mv /data/user/0/com.termux/files/usr/etc/motd /data/user/0/com.termux/files/usr/etc/motd.bak;
