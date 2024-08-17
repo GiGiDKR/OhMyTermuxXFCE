@@ -12,7 +12,7 @@ if ! command -v gum &> /dev/null; then
 fi
 
 banner() {
-    gum style --border double --padding "1 2" --margin "1 2" --align center --foreground 212 --background 57 "XFCE Termux"
+    gum style --border double --padding "1 2" --margin "1 2" --align center --foreground 212 --background 57 "OhMyTermuxXFCE"
 }
 
 finish() {
