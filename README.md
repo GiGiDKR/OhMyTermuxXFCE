@@ -6,7 +6,7 @@ You only need to pick your username and follow the prompts. This will take rough
 
 Please read the whole Readme for more information about this setup.  
 
-# 🔥 Install
+# Installation
 
 To normal install run this command in termux
 
@@ -20,12 +20,12 @@ To install minimal mode
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +x install-min.sh && ./install-min.sh
 ```
 
-To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux))
+🔥 To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux))
 ```
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_v2.sh -o install_v2.sh && chmod +x install_v2.sh && ./install_v2.sh
 ```
 
-To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux)) with [gum](https://github.com/charmbracelet/gum)
+🔥 To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux)) with [gum](https://github.com/charmbracelet/gum)
 
 ```
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh
@@ -33,7 +33,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.
 &nbsp;
 
 
-# 🔥 Starting the desktop
+# Starting the desktop
 
 During install you will recieve a popup to allow installs from termux, this will open the APK for the Termux-X11 android app. While you do not have to allow installs from termux, you will still need to install manually by using a file browser and finding the APK in your downloads folder. 
   
