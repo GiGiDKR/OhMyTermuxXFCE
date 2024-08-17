@@ -49,7 +49,7 @@ alias show='nala show'
 " >> $PREFIX/etc/bash.bashrc
 
 # Téléchargement de l'image de fond
-gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/Termux_XFCE/main/mac_waves.png
+gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/mac_waves.png
 mv mac_waves.png $PREFIX/share/backgrounds/xfce/
 
 # Installation du thème WhiteSur-Dark
