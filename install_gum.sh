@@ -103,9 +103,9 @@ echo ""
 echo "Création des répertoires utilisateur..."
 mkdir $HOME/Desktop
 
-gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/xfce_gum.sh
-gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/proot_gum.h
-gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/Termux_XFCE/raw/main/utils.sh
+gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce_gum.sh
+gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot_gum.h
+gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/utils.sh
 
 chmod +x *.sh
 
