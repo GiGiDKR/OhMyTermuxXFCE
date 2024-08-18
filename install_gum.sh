@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Unofficial Bash Strict Mode
-set -euo pipefail
-IFS=$'\n\t'
-
 # Installation de gum
 if ! command -v gum &> /dev/null; then
     echo "Installation de gum..."
@@ -79,9 +75,9 @@ if gum confirm "Choisir un répertoire de sources Termux ?"; then
 fi
 
 show_banner
-gum spin --title "Mise à jour des paquets" -- pkg update -y -o Dpkg::Options::="--force-confold"
+gum spin --title "Mise à jour des paquets" -- pkg update -y
 show_banner
-gum spin --title "Mise à niveau des paquets" -- pkg upgrade -y -o Dpkg::Options::="--force-confold"
+gum spin --title "Mise à niveau des paquets" -- pkg upgrade -y
 
 file_path="$HOME/.termux/termux.properties"
 
@@ -112,7 +108,7 @@ gum spin --title "Désinstallation de dbus" -- pkg uninstall dbus -y
 show_banner
 gum spin --title "Mise à jour des paquets" -- pkg update
 show_banner
-gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
+gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y
 
 show_banner
 echo ""
