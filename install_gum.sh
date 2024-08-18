@@ -11,8 +11,17 @@ if ! command -v gum &> /dev/null; then
     pkg install -y gum
 fi
 
-banner() {
-    gum style --border double --padding "1 2" --margin "1 2" --align center --foreground 212 --background 57 "OhMyTermuxXFCE"
+show_banner() {
+    clear
+    gum style \
+        --foreground 212 \
+        --border-foreground 212 \
+        --border double \
+        --align center \
+        --width 40 \
+        --margin "1 2" \
+        "Oh-My-Termux" \
+        "XFCE - DEBIAN"
 }
 
 finish() {
@@ -28,14 +37,13 @@ trap finish EXIT
 
 clear
 
-banner
+show_banner
 
 # Vérification et création du fichier colors.properties si nécessaire
 termux_dir="$HOME/.termux"
 file_path="$termux_dir/colors.properties"
 
 if [ ! -f "$file_path" ]; then
-    echo "Création du fichier colors.properties avec le contenu par défaut..."
     mkdir -p "$termux_dir"
     cat <<EOL > "$file_path"
 # http://dotfiles.org/~jbromley/.Xresources
@@ -63,10 +71,12 @@ EOL
 fi
 
 echo ""
-username=$(gum input --placeholder "Entrez le nom d'utilisateur à créer : " --password)
+username=$(gum input --placeholder "Entrez le nom d'utilisateur à créer : ")
 clear
 
-gum spin --title "Mise à jour des dépôts" -- termux-change-repo
+if gum confirm "Choisir un répertoire de sources Termux ?"; then
+    termux-change-repo
+fi
 
 gum spin --title "Mise à jour des paquets" -- pkg update -y -o Dpkg::Options::="--force-confold"
 gum spin --title "Mise à niveau des paquets" -- pkg upgrade -y -o Dpkg::Options::="--force-confold"
@@ -87,24 +97,22 @@ else
     echo "Le fichier motd n'existe pas !"
 fi
 
-clear -x
-banner
+show_banner
 echo ""
-echo "Configuration de l'accès au stockage externe." 
+echo "Accès au stockage externe." 
 echo ""
-gum confirm "Appuyez sur n'importe quelle touche pour continuer..." && termux-setup-storage
+gum confirm "Appuyez sur une touche pour continuer..." && termux-setup-storage
 clear
 
 pkgs=('wget' 'ncurses-utils' 'dbus' 'proot-distro' 'x11-repo' 'tur-repo' 'pulseaudio')
 
-gum spin --title "Installation de ncurses-ui-libs" -- pkg install ncurses-ui-libs
+gum spin --title "Installation des pré-requis" -- pkg install ncurses-ui-libs
 
 gum spin --title "Désinstallation de dbus" -- pkg uninstall dbus -y
 gum spin --title "Mise à jour des paquets" -- pkg update
 gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 
-clear -x
-banner
+show_banner
 echo ""
 echo "Création des répertoires utilisateur..."
 mkdir $HOME/Desktop
@@ -119,8 +127,7 @@ gum spin --title "Exécution du script xfce" -- ./xfce_gum.sh "$username"
 gum spin --title "Exécution du script proot" -- ./proot_gum.sh "$username"
 gum spin --title "Exécution du script utils" -- ./utils.sh
 
-clear -x
-echo ""
+show_banner
 echo "Installation de Termux-X11 APK" 
 echo ""
 if gum confirm "Voulez-vous installer Termux-X11 ?"; then
