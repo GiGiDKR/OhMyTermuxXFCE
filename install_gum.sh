@@ -21,7 +21,7 @@ show_banner() {
         --width 40 \
         --margin "1 2" \
         "Oh-My-Termux" \
-        "XFCE - DEBIAN"
+        "    XFCE  "
 }
 
 finish() {
