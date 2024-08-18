@@ -78,7 +78,9 @@ if gum confirm "Choisir un répertoire de sources Termux ?"; then
     termux-change-repo
 fi
 
+show_banner
 gum spin --title "Mise à jour des paquets" -- pkg update -y -o Dpkg::Options::="--force-confold"
+show_banner
 gum spin --title "Mise à niveau des paquets" -- pkg upgrade -y -o Dpkg::Options::="--force-confold"
 
 file_path="$HOME/.termux/termux.properties"
@@ -98,18 +100,18 @@ else
 fi
 
 show_banner
-echo ""
-echo "Accès au stockage externe." 
-echo ""
-gum confirm "Appuyez sur une touche pour continuer..." && termux-setup-storage
-clear
+gum confirm "Accorder l'accès au stockage externe ?" && termux-setup-storage
 
+show_banner
 pkgs=('wget' 'ncurses-utils' 'dbus' 'proot-distro' 'x11-repo' 'tur-repo' 'pulseaudio')
 
+show_banner
 gum spin --title "Installation des pré-requis" -- pkg install ncurses-ui-libs
 
 gum spin --title "Désinstallation de dbus" -- pkg uninstall dbus -y
+show_banner
 gum spin --title "Mise à jour des paquets" -- pkg update
+show_banner
 gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y -o Dpkg::Options::="--force-confold"
 
 show_banner
@@ -123,6 +125,7 @@ gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiD
 
 chmod +x *.sh
 
+show_banner
 gum spin --title "Exécution du script xfce" -- ./xfce_gum.sh "$username"
 gum spin --title "Exécution du script proot" -- ./proot_gum.sh "$username"
 gum spin --title "Exécution du script utils" -- ./utils.sh
@@ -140,13 +143,12 @@ fi
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
 
-rm xfce_v2.sh
-rm proot_v2.sh
+rm xfce_gum.sh
+rm proot_gum.sh
 rm utils.sh
-rm install_v2.sh
+rm install_gum.sh
 
-clear -x
-banner
+show_banner
 echo ""
 echo "Installation terminée !"
 echo ""
