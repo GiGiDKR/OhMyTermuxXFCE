@@ -323,6 +323,7 @@ else
 fi
 
 # Confirmation pour installer OhMyTermuxXFCE
+show_banner
 if $USE_GUM; then
     if ! gum confirm "Installer OhMyTermuxXFCE ?"; then
         show_banner
@@ -461,7 +462,7 @@ else
 fi
 
 # Ajout du menu pour exécuter Oh-My-Termux
-clear
+show_banner
 if $USE_GUM; then
     if gum confirm "Exécuter OhMyTermux ?"; then
         clear
