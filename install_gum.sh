@@ -407,8 +407,8 @@ fi
 chmod +x *.sh
 
 show_banner
-./xfce_gum.sh "$username"
-./proot_gum.sh "$username"
+./xfce_gum.sh "$username" --gum
+./proot_gum.sh "$username" --gum
 ./utils.sh
 
 show_banner
