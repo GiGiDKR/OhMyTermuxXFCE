@@ -25,7 +25,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_v2.sh -o install_v2.sh && chmod +x install_v2.sh && ./install_v2.sh
 ```
 
-🔥 To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux)) with [gum](https://github.com/charmbracelet/gum)
+🔥 To install v3 (with a choice of shell and their selection of custom plugins and prompts) with [gum](https://github.com/charmbracelet/gum)
 
 ```bash
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh --gum
