@@ -42,7 +42,7 @@ show_banner() {
             --width 40 \
             --margin "1 2" \
             "Oh-My-Termux" \
-            "    XFCE  "
+            "  XFCE  "
     else
         echo "Oh-My-Termux - XFCE"
         echo ""
