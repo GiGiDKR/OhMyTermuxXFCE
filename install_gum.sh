@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Demander à l'utilisateur s'il souhaite changer le répertoire des sources Termux
+echo "Changer de répertoire de sources Termux ? (o/n)"
+read change_repo_choice
+
+if [ "$change_repo_choice" = "o" ]; then
+    termux-change-repo
+fi
+
 # Variable pour déterminer si gum doit être utilisé
 USE_GUM=false
 
@@ -56,7 +64,6 @@ finish() {
 
 trap finish EXIT
 
-# Début du script
 clear
 
 # Appel de la fonction pour vérifier et installer gum
