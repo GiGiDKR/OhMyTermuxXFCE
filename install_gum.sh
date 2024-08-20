@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Demander à l'utilisateur s'il souhaite changer le répertoire des sources Termux
+clear
 echo "Changer de répertoire de sources Termux ? (o/n)"
 read change_repo_choice
 
