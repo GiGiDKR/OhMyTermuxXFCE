@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Unofficial Bash Strict Mode
-set -euo pipefail
-IFS=$'\n\t'
-
 # Installation de gum
 if ! command -v gum &> /dev/null; then
     echo "Installation de gum..."
@@ -15,7 +11,11 @@ finish() {
   local ret=$?
   if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
     echo
-    gum style --foreground 196 "ERREUR: Failed to setup XFCE on Termux."
+    if command -v gum &> /dev/null; then
+        gum style --foreground 196 "ERREUR: Failed to setup XFCE on Termux."
+    else
+        echo "ERREUR: Failed to setup XFCE on Termux."
+    fi
     echo "Please refer to the error message(s) above"
   fi
 }
@@ -26,28 +26,58 @@ username="$1"
 
 pkgs_proot=('sudo' 'wget' 'nala' 'jq')
 
-# Installation de Debian proot avec gum spin pour le retour utilisateur
-gum spin --title "Installation de Debian proot" -- pd install debian
+# Vérifier si gum est installé et utiliser echo si ce n'est pas le cas
+if command -v gum &> /dev/null; then
+    gum spin --title "Installation de Debian proot" -- pd install debian
+else
+    echo "Installation de Debian proot..."
+    pd install debian
+fi
 
-# Mise à jour des paquets avec gum spin
-gum spin --title "Mise à jour des paquets" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 apt update
+# Mise à jour des paquets
+if command -v gum &> /dev/null; then
+    gum spin --title "Mise à jour des paquets" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 apt update
+else
+    echo "Mise à jour des paquets..."
+    pd login debian --shared-tmp -- env DISPLAY=:1.0 apt update
+fi
 pd login debian --shared-tmp -- env DISPLAY=:1.0 apt upgrade -y
 
-gum spin --title "Installation des paquets" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 apt install "${pkgs_proot[@]}" -y -o Dpkg::Options::="--force-confold"
+# Installation des paquets
+if command -v gum &> /dev/null; then
+    gum spin --title "Installation des paquets" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 apt install "${pkgs_proot[@]}" -y
+else
+    echo "Installation des paquets..."
+    pd login debian --shared-tmp -- env DISPLAY=:1.0 apt install "${pkgs_proot[@]}" -y
+fi
 
-# Création de l'utilisateur avec gum spin
-gum spin --title "Création de l'utilisateur" -- {
+# Création de l'utilisateur
+if command -v gum &> /dev/null; then
+    gum spin --title "Création de l'utilisateur" -- {
+        pd login debian --shared-tmp -- env DISPLAY=:1.0 groupadd storage
+        pd login debian --shared-tmp -- env DISPLAY=:1.0 groupadd wheel
+        pd login debian --shared-tmp -- env DISPLAY=:1.0 useradd -m -g users -G wheel,audio,video,storage -s /bin/bash "$username"
+    }
+else
+    echo "Création de l'utilisateur..."
     pd login debian --shared-tmp -- env DISPLAY=:1.0 groupadd storage
     pd login debian --shared-tmp -- env DISPLAY=:1.0 groupadd wheel
     pd login debian --shared-tmp -- env DISPLAY=:1.0 useradd -m -g users -G wheel,audio,video,storage -s /bin/bash "$username"
-}
+fi
 
 # Ajout de l'utilisateur à sudoers
-gum spin --title "Ajout à sudoers" -- {
+if command -v gum &> /dev/null; then
+    gum spin --title "Ajout à sudoers" -- {
+        chmod u+rw $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
+        echo "$username ALL=(ALL) NOPASSWD:ALL" | tee -a $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers > /dev/null
+        chmod u-w $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
+    }
+else
+    echo "Ajout à sudoers..."
     chmod u+rw $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
     echo "$username ALL=(ALL) NOPASSWD:ALL" | tee -a $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers > /dev/null
     chmod u-w $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
-}
+fi
 
 # Configuration de l'affichage proot
 echo "export DISPLAY=:1.0" >> $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc
@@ -76,6 +106,10 @@ alias list='nala list --upgradeable'
 alias show='nala show '
 alias search='nala search '
 alias start='echo please run from termux, not Debian proot.'
+alias cm='chmod +x'
+alias clone='git clone'
+alias push=\"git pull && git add . && git commit -m 'mobile push' && git push\"
+alias bashconfig='nano $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc'
 " >> $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc
 
 # Configuration du fuseau horaire proot
@@ -95,5 +129,10 @@ mkdir -p $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fo
 mkdir -p $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.themes/
 
 # Configuration de l'accélération matérielle
-gum spin --title "Téléchargement de mesa-vulkan-kgsl" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb
+if command -v gum &> /dev/null; then
+    gum spin --title "Téléchargement de mesa-vulkan-kgsl" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb
+else
+    echo "Téléchargement de mesa-vulkan-kgsl..."
+    pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb
+fi
 pd login debian --shared-tmp -- env DISPLAY=:1.0 sudo apt install -y ./mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb

@@ -72,27 +72,39 @@ file_path="$termux_dir/colors.properties"
 if [ ! -f "$file_path" ]; then
     mkdir -p "$termux_dir"
     cat <<EOL > "$file_path"
-# http://dotfiles.org/~jbromley/.Xresources
-background=#000010
-foreground=#ffffff
-cursor=#FF00FF
+## Name: TokyoNight
 
-color0=#000000
-color1=#9e1828
-color2=#aece92
-color3=#968a38
-color4=#414171
-color5=#963c59
-color6=#418179
-color7=#bebebe
-color8=#666666
-color9=#cf6171
-color10=#c5f779
-color11=#fff796
-color12=#4186be
-color13=#cf9ebe
-color14=#71bebe
-color15=#ffffff
+# Special
+foreground = #c0caf5
+background = #1a1b26
+cursor = #c0caf5
+# Black/Grey
+color0 = #15161e
+color8 = #414868
+# Red
+color1 = #f7768e
+color9 = #f7768e
+# Green
+color2 = #9ece6a
+color10 = #9ece6a
+# Yellow
+color3 = #e0af68
+color11 = #e0af68
+# Blue
+color4 = #7aa2f7
+color12 = #7aa2f7
+# Magenta
+color5 = #bb9af7
+color13 = #bb9af7
+# Cyan
+color6 = #7dcfff
+color14 = #7dcfff
+# White/Grey
+color7 = #a9b1d6
+color15 = #c0caf5
+# Other
+color16 = #ff9e64
+color17 = #db4b4b
 EOL
 fi
 
@@ -215,83 +227,6 @@ case $shell_choice in
             done
         fi
 
-        # Définir les répertoires
-        TERMUX=$HOME/.termux
-        CONFIG=$HOME/.config
-        COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
-        COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
-        COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
-
-        # Créer les répertoires 
-        mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
-
-        # Télécharger et extraire le répertoire src depuis le dépôt GitHub
-        show_banner
-        gum spin --title "Téléchargement des fichiers de configuration ..." -- curl -L -o $HOME/src.zip https://github.com/GiGiDKR/OhMyTermux/archive/refs/heads/main.zip
-        unzip -o $HOME/src.zip "OhMyTermux-main/src/*" -d $HOME
-        cp -r $HOME/OhMyTermux-main/src/* $HOME/.termux/
-        rm -rf $HOME/OhMyTermux-main
-        rm $HOME/src.zip
-
-
-        # Décompression des fichiers ZIP
-        clear
-        show_banner
-        gum spin --title "Décompression des fichiers ZIP ..." -- unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
-        rm "$HOME/.termux/colors.zip"
-
-        # Menu interactif pour sélectionner une police à installer
-        show_banner
-        FONT=$(gum choose --header="Sélectionner la police à installer :" "Police par défaut" "CaskaydiaCove Nerd Font" "FiraMono Nerd Font" "JetBrainsMono Nerd Font" "Mononoki Nerd Font" "VictorMono Nerd Font" "RobotoMono Nerd Font" "DejaVuSansMono Nerd Font" "UbuntuMono Nerd Font" "AnonymousPro Nerd Font" "Terminus Nerd Font")
-        echo "Installation de la police sélectionnée..."
-        case $FONT in
-            "CaskaydiaCove Nerd Font")
-                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/CaskaydiaCoveNerdFont-Regular.ttf"
-                ;;
-            "FiraMono Nerd Font")
-                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/FiraMono-Regular.ttf"
-                ;;
-            "JetBrainsMono Nerd Font")
-                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/JetBrainsMono-Regular.ttf"
-                ;;
-            "Mononoki Nerd Font")
-                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/Mononoki-Regular.ttf"
-                ;;
-            "VictorMono Nerd Font")
-                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/VictorMono-Regular.ttf"
-                ;;
-            "RobotoMono Nerd Font")
-                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/RobotoMonoNerdFont.ttf"
-                ;;
-            "DejaVuSansMono Nerd Font")
-                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/DejaVuSansMonoNerdFont.ttf"
-                ;;
-            "UbuntuMono Nerd Font")
-                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/UbuntuMonoNerdFont.ttf"
-                ;;
-            "AnonymousPro Nerd Font")
-                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/AnonymousProNerdFont.ttf"
-                ;;
-            "Terminus Nerd Font")
-                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/TerminusNerdFont.ttf"
-                ;;
-        esac
-
-        # Menu interactif pour sélectionner les packages à installer
-        show_banner
-        PACKAGES=$(gum choose --no-limit --height=20 --header="Sélectionner avec espace les packages à installer :" "nala" "eza" "bat" "lf" "fzf" "glow" "python" "lsd" "micro" "tsu" "Tout installer")
-        echo "Installation des packages sélectionnés..."
-        if [[ "$PACKAGES" == *"Tout installer"* ]]; then
-            PACKAGES="nala eza bat lf fzf glow python lsd micro tsu"
-        fi
-        if [ -n "$PACKAGES" ]; then
-            for PACKAGE in $PACKAGES; do
-                gum spin --title "Installation de $PACKAGE..." -- pkg install -y $PACKAGE
-            done
-        else
-            echo "Aucun package sélectionné. Poursuite du script ..."
-        fi
-
         # Télécharger les fichiers de configuration depuis le dépôt GitHub
         echo "Téléchargement des fichiers de configuration..."
         gum spin --title "Téléchargement des fichiers de configuration..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermux/main/aliases.zsh
@@ -306,33 +241,110 @@ case $shell_choice in
     "fish")
         echo "Fish sélectionné. Installation de Fish..."
         pkg install -y fish
-        # TO DO : ajouter le code de configuration de Fish et de ses plugins
+
+        termux-reload-settings
+        chsh -s fish
+        
+        # TODO : ajouter la configuration de Fish, de ses plugins et des alias (abbr)
         ;;
 esac
 
-# Confirmation pour installer Oh-My-TermuxXFCE
+# Définir les répertoires
+TERMUX=$HOME/.termux
+CONFIG=$HOME/.config
+COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
+COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
+COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
+
+# Créer les répertoires
+mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
+
+# Télécharger et extraire les fichiers nécessaires depuis le dépôt GitHub
+show_banner
+gum spin --title "Téléchargement de la police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermux/raw/main/font.ttf
+
+show_banner
+gum spin --title "Téléchargement de l'archive Color Scheme..." -- curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermux/raw/main/colors.zip
+clear
+show_banner
+gum spin --title "Décompression de l'archive Color Scheme..." -- unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+rm "$HOME/.termux/colors.zip"
+
+# Menu interactif pour sélectionner une police à installer
+show_banner
+FONT=$(gum choose --header="Sélectionner la police à installer :" "Police par défaut" "CaskaydiaCove Nerd Font" "FiraMono Nerd Font" "JetBrainsMono Nerd Font" "Mononoki Nerd Font" "VictorMono Nerd Font" "RobotoMono Nerd Font" "DejaVuSansMono Nerd Font" "UbuntuMono Nerd Font" "AnonymousPro Nerd Font" "Terminus Nerd Font")
+echo "Installation de la police sélectionnée..."
+case $FONT in
+    "CaskaydiaCove Nerd Font")
+        install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+        ;;
+    "FiraMono Nerd Font")
+        install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/FiraMono-Regular.ttf"
+        ;;
+    "JetBrainsMono Nerd Font")
+        install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/JetBrainsMono-Regular.ttf"
+        ;;
+    "Mononoki Nerd Font")
+        install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/Mononoki-Regular.ttf"
+        ;;
+    "VictorMono Nerd Font")
+        install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/VictorMono-Regular.ttf"
+        ;;
+    "RobotoMono Nerd Font")
+        install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/RobotoMonoNerdFont.ttf"
+        ;;
+    "DejaVuSansMono Nerd Font")
+        install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/DejaVuSansMonoNerdFont.ttf"
+        ;;
+    "UbuntuMono Nerd Font")
+        install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/UbuntuMonoNerdFont.ttf"
+        ;;
+    "AnonymousPro Nerd Font")
+        install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/AnonymousProNerdFont.ttf"
+        ;;
+    "Terminus Nerd Font")
+        install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/TerminusNerdFont.ttf"
+        ;;
+esac
+
+# Menu interactif pour sélectionner les packages à installer
+show_banner
+PACKAGES=$(gum choose --no-limit --height=20 --header="Sélectionner avec espace les packages à installer :" "nala" "eza" "bat" "lf" "fzf" "glow" "python" "lsd" "micro" "tsu" "Tout installer")
+echo "Installation des packages sélectionnés..."
+if [[ "$PACKAGES" == *"Tout installer"* ]]; then
+    PACKAGES="nala eza bat lf fzf glow python lsd micro tsu"
+fi
+if [ -n "$PACKAGES" ]; then
+    for PACKAGE in $PACKAGES; do
+        gum spin --title "Installation de $PACKAGE..." -- pkg install -y $PACKAGE
+    done
+else
+    echo "Aucun package sélectionné. Poursuite du script ..."
+fi
+
+# Confirmation pour installer OhMyTermuxXFCE
 if $USE_GUM; then
-    if ! gum confirm "Installer Oh-My-TermuxXFCE ?"; then
+    if ! gum confirm "Installer OhMyTermuxXFCE ?"; then
         show_banner
         # Ajout du menu pour exécuter Oh-My-Termux
-        if gum confirm "Exécuter Oh-My-Termux ?"; then
+        if gum confirm "Exécuter OhMyTermux ?"; then
             exec $SHELL
         else
-            echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+            echo "OhMyTermux sera actif au prochain démarrage de Termux."
         fi
         exit 0
     fi
 else
-    echo "Installer Oh-My-TermuxXFCE ? (o/n)"
+    echo "Installer OhMyTermuxXFCE ? (o/n)"
     read choice
     if [ "$choice" != "o" ]; then
         show_banner
-        echo "Exécuter Oh-My-Termux ? (o/n)"
+        echo "Exécuter OhMyTermux ? (o/n)"
         read choice
         if [ "$choice" = "o" ]; then
             exec $SHELL
         else
-            echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+            echo "OhMyTermux sera actif au prochain démarrage de Termux."
         fi
         exit 0
     fi
@@ -367,9 +379,9 @@ else
 fi
 
 show_banner
-echo ""
 echo "Création des répertoires utilisateur..."
 mkdir -p $HOME/Desktop
+# TODO Ajouter symlink
 
 show_banner
 if $USE_GUM; then
@@ -387,8 +399,8 @@ chmod +x *.sh
 
 show_banner
 if $USE_GUM; then
-    gum spin --title "Exécution du script xfce" -- ./xfce_gum.sh "$username"
-    gum spin --title "Exécution du script proot" -- ./proot_gum.sh "$username"
+    gum spin --title "Exécution du script xfce" -- ./xfce_gum.sh "$username" --gum
+    gum spin --title "Exécution du script proot" -- ./proot_gum.sh "$username" --gum
     gum spin --title "Exécution du script utils" -- ./utils.sh
 else
     echo && echo "Exécution du script xfce..."
@@ -443,24 +455,24 @@ if $USE_GUM; then
 else
     echo "Installation terminée !"
     echo
-    echo "Exécuter XFCE4 : start"
-    echo "Exécuter DEBIAN : debian"
+    echo "XFCE4 (GUI) : start"
+    echo "DEBIAN (CLI) : debian"
     echo
 fi
 
 # Ajout du menu pour exécuter Oh-My-Termux
 if $USE_GUM; then
-    if gum confirm "Exécuter Oh-My-Termux ?"; then
+    if gum confirm "Exécuter OhMyTermux ?"; then
         exec $SHELL
     else
-        echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+        echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 else
-    echo "Exécuter Oh-My-Termux ? (o/n)"
+    echo "Exécuter OhMyTermux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
         exec $SHELL
     else
-        echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+        echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 fi
