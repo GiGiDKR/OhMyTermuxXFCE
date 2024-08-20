@@ -10,25 +10,25 @@ Please read the whole Readme for more information about this setup.
 
 To normal install run this command in termux
 
-```
+```bash
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -o install.sh && chmod +x install.sh && ./install.sh
 ```
 
 To install minimal mode
 
-```
+```bash
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install-min.sh -o install-min.sh && chmod +x install-min.sh && ./install-min.sh
 ```
 
 🔥 To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux))
-```
+```bash
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_v2.sh -o install_v2.sh && chmod +x install_v2.sh && ./install_v2.sh
 ```
 
 🔥 To install v2 (for use with [OhMyTermux](https://github.com/GiGiDKR/OhMyTermux)) with [gum](https://github.com/charmbracelet/gum)
 
-```
-curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh
+```bash
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh --gum
 ```
 &nbsp;
 
