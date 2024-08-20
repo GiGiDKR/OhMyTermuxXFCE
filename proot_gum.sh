@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 # Installation de gum
 if ! command -v gum &> /dev/null; then
     echo "Installation de gum..."
