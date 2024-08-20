@@ -463,6 +463,7 @@ fi
 # Ajout du menu pour exécuter Oh-My-Termux
 if $USE_GUM; then
     if gum confirm "Exécuter OhMyTermux ?"; then
+        termux-reload-settings
         exec $SHELL
     else
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
@@ -471,6 +472,7 @@ else
     echo "Exécuter OhMyTermux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
+        termux-reload-settings
         exec $SHELL
     else
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
