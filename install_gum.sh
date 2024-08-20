@@ -261,10 +261,10 @@ mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_
 
 # Télécharger et extraire les fichiers nécessaires depuis le dépôt GitHub
 show_banner
-gum spin --title "Téléchargement de la police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermux/raw/main/font.ttf
+gum spin --title "Téléchargement de la police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/font.ttf
 
 show_banner
-gum spin --title "Téléchargement de l'archive Color Scheme..." -- curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermux/raw/main/colors.zip
+gum spin --title "Téléchargement de l'archive Color Scheme..." -- curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/colors.zip
 clear
 show_banner
 gum spin --title "Décompression de l'archive Color Scheme..." -- unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
