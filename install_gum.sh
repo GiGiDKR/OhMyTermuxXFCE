@@ -42,16 +42,16 @@ show_banner() {
 
 # Fonction de fin pour gérer les erreurs
 finish() {
-  local ret=$?
-  if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
-    echo
-    if $USE_GUM; then
-        gum style --foreground 196 "ERREUR: Installation de XFCE dans Termux impossible."
-    else
-        echo "ERREUR: Installation de XFCE dans Termux impossible."
+    local ret=$?
+    if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
+        echo
+        if $USE_GUM; then
+            gum style --foreground 196 "ERREUR: Installation de XFCE dans Termux impossible."
+        else
+            echo "ERREUR: Installation de XFCE dans Termux impossible."
+        fi
+        echo "Veuillez vous référer au(x) message(s) d'erreur ci-dessus."
     fi
-    echo "Veuillez vous référer au(x) message(s) d'erreur ci-dessus."
-  fi
 }
 
 trap finish EXIT
@@ -96,47 +96,11 @@ color15=#ffffff
 EOL
 fi
 
-show_banner
-if $USE_GUM; then
-    username=$(gum input --placeholder "Entrez le nom d'utilisateur à créer : ")
-else
-    echo "Entrez le nom d'utilisateur à créer : "
-    read username
-fi
-clear
-
-show_banner
-if $USE_GUM; then
-    gum confirm "Choisir un répertoire de sources Termux ?" && termux-change-repo
-else
-    echo "Choisir un répertoire de sources Termux ? (o/n)"
-    read choice
-    [ "$choice" = "o" ] && termux-change-repo
-fi
-
-show_banner
-if $USE_GUM; then
-    gum spin --title "Mise à jour des paquets" -- pkg update -y
-else
-    echo && echo "Mise à jour des paquets..."
-    pkg update -y
-fi
-
-show_banner
-if $USE_GUM; then
-    gum spin --title "Mise à niveau des paquets" -- pkg upgrade -y
-else
-    echo && echo "Mise à niveau des paquets..."
-    pkg upgrade -y
-fi
-
-
+# Configuration du fichier termux.properties
 file_path="$HOME/.termux/termux.properties"
 
-# Vérifier et créer le répertoire si nécessaire
 mkdir -p "$(dirname "$file_path")"
 
-# Vérifier l'existence du fichier et le créer avec le contenu par défaut si nécessaire
 if [ ! -f "$file_path" ]; then
     echo "Le fichier $file_path n'existe pas. Création du fichier avec le contenu par défaut."
     cat <<EOL > "$file_path"
@@ -146,19 +110,23 @@ bell-character = ignore
 fullscreen = true
 EOL
 else
-    # Modifier le fichier pour décommenter les lignes spécifiques
     sed -i 's/^#\(allow-external-apps = true\)/\1/' "$file_path"
     sed -i 's/^#\(use-black-ui = true\)/\1/' "$file_path"
     sed -i 's/^#\(bell-character = ignore\)/\1/' "$file_path"
     sed -i 's/^#\(fullscreen = true\)/\1/' "$file_path"
 fi
 
-if [ -f "/data/user/0/com.termux/files/usr/etc/motd" ]; then
-    mv /data/user/0/com.termux/files/usr/etc/motd /data/user/0/com.termux/files/usr/etc/motd.bak
+# Suppression du fichier motd
+MOTD_PATH="/data/data/com.termux/files/usr/etc/motd"
+MOTD_BACKUP_PATH="/data/data/com.termux/files/usr/etc/motd.bak"
+
+if [ -f "$MOTD_PATH" ]; then
+    mv "$MOTD_PATH" "$MOTD_BACKUP_PATH"
 else
     echo "Le fichier motd n'existe pas !"
 fi
 
+# Accorder l'accès au stockage externe
 show_banner
 if $USE_GUM; then
     gum confirm "Accorder l'accès au stockage externe ?" && termux-setup-storage
@@ -168,6 +136,209 @@ else
     [ "$choice" = "o" ] && termux-setup-storage
 fi
 
+# Menu pour choisir le shell
+show_banner
+if $USE_GUM; then
+    shell_choice=$(gum choose --header="Choisissez le shell à installer :" "bash" "zsh" "fish")
+else
+    echo "Choisissez le shell à installer :"
+    echo "1) bash"
+    echo "2) zsh"
+    echo "3) fish"
+    read -p "Entrez le numéro de votre choix : " choice
+    case $choice in
+        1) shell_choice="bash" ;;
+        2) shell_choice="zsh" ;;
+        3) shell_choice="fish" ;;
+        *) shell_choice="bash" ;;
+    esac
+fi
+
+case $shell_choice in
+    "bash")
+        echo "Bash sélectionné, poursuite du script..."
+        ;;
+    "zsh")
+        echo "ZSH sélectionné. Installation de ZSH..."
+        gum spin --title "Installation de ZSH..." -- pkg install -y zsh
+
+        # Menu interactif pour installer Oh My Zsh
+        show_banner
+        if gum confirm "Voulez-vous installer Oh My Zsh ?"; then
+            gum spin --title "Installation des prérequis..." -- pkg install -y wget curl git unzip
+            gum spin --title "Installation de Oh My Zsh..." -- git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
+            cp "$HOME/.oh-my-zsh/templates/zshrc.zsh-template" "$HOME/.zshrc"
+        fi
+
+        # Menu interactif pour installer PowerLevel10k
+        show_banner
+        if gum confirm "Voulez-vous installer PowerLevel10k ?"; then
+            gum spin --title "Installation de PowerLevel10k..." -- git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" || true
+            echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >> "$HOME/.zshrc"
+
+            # Demander à l'utilisateur de choisir la configuration du prompt
+            show_banner
+            if gum confirm "Installer le prompt OhMyTermux PowerLevel10k ?"; then
+                gum spin --title "Téléchargement de la configuration PowerLevel10k..." -- curl -fLo "$HOME/.p10k.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermux/main/p10k.zsh
+            else
+                echo "Vous pouvez configurer le prompt PowerLevel10k manuellement en exécutant 'p10k configure' après l'installation."
+            fi
+
+            # Installation des plugins
+            show_banner
+            PLUGINS=$(gum choose --no-limit --header="Sélectionner avec espace les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
+            echo "Installation des plugins sélectionnés..."
+            if [[ "$PLUGINS" == *"Tout installer"* ]]; then
+                PLUGINS="zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use zsh-abbr zsh-alias-finder"
+            fi
+            for PLUGIN in $PLUGINS; do
+                case $PLUGIN in
+                    "zsh-autosuggestions")
+                        git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
+                        ;;
+                    "zsh-syntax-highlighting")
+                        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" || true
+                        ;;
+                    "zsh-completions")
+                        git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" || true
+                        ;;
+                    "you-should-use")
+                        git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$HOME/.oh-my-zsh/custom/plugins/you-should-use" || true
+                        ;;
+                    "zsh-abbr")
+                        git clone https://github.com/olets/zsh-abbr "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" || true
+                        ;;
+                    "zsh-alias-finder")
+                        git clone https://github.com/akash329d/zsh-alias-finder "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" || true
+                        ;;
+                esac
+            done
+        fi
+
+        # Définir les répertoires
+        TERMUX=$HOME/.termux
+        CONFIG=$HOME/.config
+        COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
+        COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
+        COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
+
+        # Créer les répertoires 
+        mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
+
+        # Télécharger et extraire le répertoire src depuis le dépôt GitHub
+        show_banner
+        gum spin --title "Téléchargement des fichiers de configuration ..." -- curl -L -o $HOME/src.zip https://github.com/GiGiDKR/OhMyTermux/archive/refs/heads/main.zip
+        unzip -o $HOME/src.zip "OhMyTermux-main/src/*" -d $HOME
+        cp -r $HOME/OhMyTermux-main/src/* $HOME/.termux/
+        rm -rf $HOME/OhMyTermux-main
+        rm $HOME/src.zip
+
+
+        # Décompression des fichiers ZIP
+        clear
+        show_banner
+        gum spin --title "Décompression des fichiers ZIP ..." -- unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+        rm "$HOME/.termux/colors.zip"
+
+        # Menu interactif pour sélectionner une police à installer
+        show_banner
+        FONT=$(gum choose --header="Sélectionner la police à installer :" "Police par défaut" "CaskaydiaCove Nerd Font" "FiraMono Nerd Font" "JetBrainsMono Nerd Font" "Mononoki Nerd Font" "VictorMono Nerd Font" "RobotoMono Nerd Font" "DejaVuSansMono Nerd Font" "UbuntuMono Nerd Font" "AnonymousPro Nerd Font" "Terminus Nerd Font")
+        echo "Installation de la police sélectionnée..."
+        case $FONT in
+            "CaskaydiaCove Nerd Font")
+                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+                ;;
+            "FiraMono Nerd Font")
+                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/FiraMono-Regular.ttf"
+                ;;
+            "JetBrainsMono Nerd Font")
+                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/JetBrainsMono-Regular.ttf"
+                ;;
+            "Mononoki Nerd Font")
+                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/Mononoki-Regular.ttf"
+                ;;
+            "VictorMono Nerd Font")
+                install_font "https://github.com/mayTermux/myTermux/raw/main/.fonts/VictorMono-Regular.ttf"
+                ;;
+            "RobotoMono Nerd Font")
+                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/RobotoMonoNerdFont.ttf"
+                ;;
+            "DejaVuSansMono Nerd Font")
+                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/DejaVuSansMonoNerdFont.ttf"
+                ;;
+            "UbuntuMono Nerd Font")
+                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/UbuntuMonoNerdFont.ttf"
+                ;;
+            "AnonymousPro Nerd Font")
+                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/AnonymousProNerdFont.ttf"
+                ;;
+            "Terminus Nerd Font")
+                install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/TerminusNerdFont.ttf"
+                ;;
+        esac
+
+        # Menu interactif pour sélectionner les packages à installer
+        show_banner
+        PACKAGES=$(gum choose --no-limit --height=20 --header="Sélectionner avec espace les packages à installer :" "nala" "eza" "bat" "lf" "fzf" "glow" "python" "lsd" "micro" "tsu" "Tout installer")
+        echo "Installation des packages sélectionnés..."
+        if [[ "$PACKAGES" == *"Tout installer"* ]]; then
+            PACKAGES="nala eza bat lf fzf glow python lsd micro tsu"
+        fi
+        if [ -n "$PACKAGES" ]; then
+            for PACKAGE in $PACKAGES; do
+                gum spin --title "Installation de $PACKAGE..." -- pkg install -y $PACKAGE
+            done
+        else
+            echo "Aucun package sélectionné. Poursuite du script ..."
+        fi
+
+        # Télécharger les fichiers de configuration depuis le dépôt GitHub
+        echo "Téléchargement des fichiers de configuration..."
+        gum spin --title "Téléchargement des fichiers de configuration..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermux/main/aliases.zsh
+        gum spin --title "Téléchargement du fichier zshrc..." -- curl -fLo "$HOME/.zshrc" https://raw.githubusercontent.com/GiGiDKR/OhMyTermux/main/zshrc
+
+        echo "alias help='glow \$HOME/.config/OhMyTermux/Help.md'" >> "$HOME/.zshrc"
+
+        termux-reload-settings
+
+        chsh -s zsh
+        ;;
+    "fish")
+        echo "Fish sélectionné. Installation de Fish..."
+        pkg install -y fish
+        # TO DO : ajouter le code de configuration de Fish et de ses plugins
+        ;;
+esac
+
+# Confirmation pour installer Oh-My-TermuxXFCE
+if $USE_GUM; then
+    if ! gum confirm "Installer Oh-My-TermuxXFCE ?"; then
+        show_banner
+        # Ajout du menu pour exécuter Oh-My-Termux
+        if gum confirm "Exécuter Oh-My-Termux ?"; then
+            exec $SHELL
+        else
+            echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+        fi
+        exit 0
+    fi
+else
+    echo "Installer Oh-My-TermuxXFCE ? (o/n)"
+    read choice
+    if [ "$choice" != "o" ]; then
+        show_banner
+        echo "Exécuter Oh-My-Termux ? (o/n)"
+        read choice
+        if [ "$choice" = "o" ]; then
+            exec $SHELL
+        else
+            echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+        fi
+        exit 0
+    fi
+fi
+
+# Continuer le script tel qu'il est
 show_banner
 pkgs=('wget' 'ncurses-utils' 'dbus' 'proot-distro' 'x11-repo' 'tur-repo' 'pulseaudio')
 
@@ -199,7 +370,6 @@ show_banner
 echo ""
 echo "Création des répertoires utilisateur..."
 mkdir -p $HOME/Desktop
-# To do : symlink
 
 show_banner
 if $USE_GUM; then
@@ -261,20 +431,36 @@ rm install_gum.sh
 
 show_banner
 if $USE_GUM; then
-    if $USE_GUM; then
-        gum style \
-            --foreground 212 \
-            --border-foreground 212 \
-            --align center \
-            --width 40 \
-            --margin "1 2" \
-            "Installation terminée !" \
-            "Exécuter XFCE4 : start" \
-            "Exécuter DEBIAN : debian"
- else
+    gum style \
+        --foreground 212 \
+        --border-foreground 212 \
+        --align center \
+        --width 40 \
+        --margin "1 2" \
+        "Installation terminée !" \
+        "Exécuter XFCE4 : start" \
+        "Exécuter DEBIAN : debian"
+else
     echo "Installation terminée !"
     echo
     echo "Exécuter XFCE4 : start"
     echo "Exécuter DEBIAN : debian"
     echo
+fi
+
+# Ajout du menu pour exécuter Oh-My-Termux
+if $USE_GUM; then
+    if gum confirm "Exécuter Oh-My-Termux ?"; then
+        exec $SHELL
+    else
+        echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+    fi
+else
+    echo "Exécuter Oh-My-Termux ? (o/n)"
+    read choice
+    if [ "$choice" = "o" ]; then
+        exec $SHELL
+    else
+        echo "Oh-My-Termux sera actif au prochain démarrage de Termux."
+    fi
 fi
