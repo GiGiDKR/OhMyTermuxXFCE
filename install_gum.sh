@@ -461,8 +461,10 @@ else
 fi
 
 # Ajout du menu pour exécuter Oh-My-Termux
+clear
 if $USE_GUM; then
     if gum confirm "Exécuter OhMyTermux ?"; then
+        clear
         termux-reload-settings
         exec $SHELL
     else
@@ -472,6 +474,7 @@ else
     echo "Exécuter OhMyTermux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
+        clear
         termux-reload-settings
         exec $SHELL
     else
