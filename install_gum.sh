@@ -407,18 +407,9 @@ fi
 chmod +x *.sh
 
 show_banner
-if $USE_GUM; then
-    gum spin --title "Exécution du script xfce" -- ./xfce_gum.sh "$username" --gum
-    gum spin --title "Exécution du script proot" -- ./proot_gum.sh "$username" --gum
-    gum spin --title "Exécution du script utils" -- ./utils.sh
-else
-    echo && echo "Exécution du script xfce..."
-    ./xfce_gum.sh "$username"
-    echo && echo "Exécution du script proot..."
-    ./proot_gum.sh "$username"
-    echo && echo "Exécution du script utils..."
-    ./utils.sh
-fi
+./xfce_gum.sh "$username"
+./proot_gum.sh "$username"
+./utils.sh
 
 show_banner
 echo "Installation de Termux-X11 APK"
