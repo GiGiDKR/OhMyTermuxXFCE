@@ -1,6 +1,7 @@
 #!/bin/bash
 
 clear
+
 echo "Changer de répertoire de sources Termux ? (o/n)"
 read change_repo_choice
 
