@@ -411,7 +411,7 @@ install_font() {
 # Menu interactif pour sélectionner les packages à installer
 show_banner
 if $USE_GUM; then
-    PACKAGES=$(gum choose --no-limit --height=20 --header="Sélectionner avec espace les packages à installer :" "nala" "eza" "bat" "lf" "fzf" "glow" "python" "lsd" "micro" "tsu" "Tout installer")
+    PACKAGES=$(gum choose --no-limit --height=13 --header="Sélectionner avec espace les packages à installer :" "nala" "eza" "bat" "lf" "fzf" "glow" "python" "lsd" "micro" "tsu" "Tout installer")
 else
     echo "Sélectionner les packages à installer (séparés par des espaces) :"
     echo "1) nala"
