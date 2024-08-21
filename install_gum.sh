@@ -2,7 +2,7 @@
 
 clear
 
-echo "Changer de répertoire de sources Termux ? (o/n)"
+echo "Changer le répertoire de sources Termux ? (o/n)"
 read change_repo_choice
 
 if [ "$change_repo_choice" = "o" ]; then
@@ -41,10 +41,10 @@ show_banner() {
             --align center \
             --width 40 \
             --margin "1 2" \
-            "Oh-My-Termux" \
-            "  XFCE  "
+            "OHMYTERMUX" \
+            "XFCE"
     else
-        echo "Oh-My-Termux - XFCE"
+        echo "OHMYTERMUX - XFCE"
         echo ""
     fi
 }
