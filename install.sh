@@ -547,14 +547,14 @@ show_banner
 echo "Installation de Termux-X11 APK"
 echo ""
 if $USE_GUM; then
-    if gum confirm "Voulez-vous installer Termux-X11 ?"; then
+    if gum confirm "Installer Termux-X11 ?"; then
         gum spin --title "Téléchargement de Termux-X11 APK" -- wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
         mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
         termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
         rm $HOME/storage/downloads/app-arm64-v8a-debug.apk
     fi
 else
-    echo "Voulez-vous installer Termux-X11 ? (o/n)"
+    echo "Installer Termux-X11 ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
         echo "Téléchargement de Termux-X11 APK..."
@@ -567,34 +567,35 @@ fi
 
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
+
 rm xfce.sh
 rm proot.sh
 rm utils.sh
 rm install.sh
 
-show_banner
-if $USE_GUM; then
-    gum style \
-        --foreground 212 \
-        --border-foreground 212 \
-        --align center \
-        --width 40 \
-        --margin "1 2" \
-        "Installation terminée !" \
-        "Exécuter XFCE4 : start" \
-        "Exécuter DEBIAN : debian"
-else
-    echo "Installation terminée !"
-    echo
-    echo "XFCE4 (GUI) : start"
-    echo "DEBIAN (CLI) : debian"
-    echo
-fi
+show_en_banner() {
+    clear
+    if $USE_GUM; then
+        gum style \
+            --foreground 212 \
+            --border-foreground 212 \
+            --align center \
+            --width 40 \
+            --margin "1 2" \
+            "Installation terminée !" \
+            "Exécuter XFCE4 : start" \
+            "Exécuter DEBIAN : debian"
+    else
+        echo "Installation terminée !"
+        echo
+        echo "XFCE4 (GUI) : start"
+        echo "DEBIAN (CLI) : debian"
+        echo
+    fi
 
-# Ajout du menu pour exécuter Oh-My-Termux
-show_banner
+show_end_banner
 if $USE_GUM; then
-    if gum confirm "Exécuter OhMyTermux ?"; then
+    if gum confirm "   Exécuter OhMyTermux ?"; then
         exec $shell_choice
     else
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
