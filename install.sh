@@ -391,21 +391,21 @@ mkdir -p $HOME/Desktop
 
 show_banner
 if $USE_GUM; then
-    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce_gum.sh
-    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot_gum.sh
+    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce.sh
+    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot.sh
     gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/utils.sh
 else
     clear && echo "Téléchargement des scripts..."
-    wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce_gum.sh
-    wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot_gum.sh
+    wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce.sh
+    wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot.sh
     wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/utils.sh
 fi
 
 chmod +x *.sh
 
 show_banner
-./xfce_gum.sh "$username" --gum
-./proot_gum.sh "$username" --gum
+./xfce.sh "$username" --gum
+./proot.sh "$username" --gum
 ./utils.sh
 
 show_banner
@@ -433,10 +433,10 @@ fi
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
 
-rm xfce_gum.sh
-rm proot_gum.sh
+rm xfce.sh
+rm proot.sh
 rm utils.sh
-rm install_gum.sh
+rm install.sh
 
 show_banner
 if $USE_GUM; then
