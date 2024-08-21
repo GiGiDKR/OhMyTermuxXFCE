@@ -260,65 +260,36 @@ select_plugins() {
     fi
 }
 
-# Menu interactif pour sélectionner les plugins à installer
-show_banner
-if $USE_GUM; then
-  PLUGINS=$(gum choose --no-limit --height=10 --header="Sélectionner avec Espace les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
-else
-  echo "Sélectionner les plugins à installer (séparés par des espaces) :"
-  echo "1) zsh-autosuggestions"
-  echo "2) zsh-syntax-highlighting"
-  echo "3) zsh-completions"
-  echo "4) you-should-use"
-  echo "5) zsh-abbr"
-  echo "6) zsh-alias-finder"
-  echo "7) Tout installer"
-  read -p "Entrez les numéros des plugins : " plugin_choices
-  # Convertir les choix en noms de plugins
-  PLUGINS=""
-  for choice in $plugin_choices; do
-    case $choice in
-      1) PLUGINS+="zsh-autosuggestions " ;;
-      2) PLUGINS+="zsh-syntax-highlighting " ;;
-      3) PLUGINS+="zsh-completions " ;;
-      4) PLUGINS+="you-should-use " ;;
-      5) PLUGINS+="zsh-abbr " ;;
-      6) PLUGINS+="zsh-alias-finder " ;;
-      7) PLUGINS="zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use zsh-abbr zsh-alias-finder" ;;
-    esac
-  done
-fi
-
-# Installation des plugins
 if [[ "$PLUGINS" == *"Tout installer"* ]]; then
   PLUGINS="zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use zsh-abbr zsh-alias-finder"
 fi
 
 for PLUGIN in $PLUGINS; do
+  if $use_gum; then
+    gum spin --title "Installation de $PLUGIN..." -- sleep 2
+  else
+    echo "Installation de $PLUGIN..."
+    sleep 2
+  fi
+
   case $PLUGIN in
     "zsh-autosuggestions")
-      show_banner
-      git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
+      git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" >/dev/null 2>&1 || true
       ;;
     "zsh-syntax-highlighting")
-      show_banner
-      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" || true
+      git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" >/dev/null 2>&1 || true
       ;;
     "zsh-completions")
-      show_banner
-      git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" || true
+      git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" >/dev/null 2>&1 || true
       ;;
     "you-should-use")
-      show_banner
-      git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$HOME/.oh-my-zsh/custom/plugins/you-should-use" || true
+      git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$HOME/.oh-my-zsh/custom/plugins/you-should-use" >/dev/null 2>&1 || true
       ;;
     "zsh-abbr")
-      show_banner
-      git clone https://github.com/olets/zsh-abbr "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" || true
+      git clone https://github.com/olets/zsh-abbr "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" >/dev/null 2>&1 || true
       ;;
     "zsh-alias-finder")
-      show_banner
-      git clone https://github.com/akash329d/zsh-alias-finder "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" || true
+      git clone https://github.com/akash329d/zsh-alias-finder "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" >/dev/null 2>&1 || true
       ;;
   esac
 done
@@ -326,10 +297,10 @@ done
 # Télécharger les fichiers de conf depuis GitHub
         show_banner
         if $USE_GUM; then
-            gum spin --title "Téléchargement des fichiers de configuration..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/aliases.zsh
+            gum spin --title "Téléchargement des fichiers de conf..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/aliases.zsh
             gum spin --title "Téléchargement du fichier zshrc..." -- curl -fLo "$HOME/.zshrc" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/zshrc
         else
-            echo "Téléchargement des fichiers de configuration..."
+            echo "Téléchargement des fichiers de conf..."
             curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/aliases.zsh
             echo "Téléchargement du fichier zshrc..."
             curl -fLo "$HOME/.zshrc" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/zshrc
@@ -364,13 +335,13 @@ mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_
 show_banner
 
 if $USE_GUM; then
-    gum spin --title "Téléchargement de la police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
+    gum spin --title "Téléchargement police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
     gum spin --title "Téléchargement des thèmes..." -- bash -c '
         curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip &&
         unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
     '
 else
-    echo "Téléchargement de la police par défaut..."
+    echo "Téléchargement police par défaut..."
     curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
     echo "Téléchargement des thèmes..."
     curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
@@ -379,8 +350,15 @@ fi
 
 rm "$HOME/.termux/colors.zip"
 
-# Menu interactif pour sélectionner une police à installer
+# Fonction pour installer les polices
+install_font() {
+    local font_url="$1"
+    curl -L -o "$HOME/.termux/font.ttf" "$font_url" >/dev/null 2>&1
+}
+
 show_banner
+
+# Menu interactif pour sélectionner une police à installer
 if $USE_GUM; then
     FONT=$(gum choose --height=20 --header="Sélectionner la police à installer :" "Police par défaut" "CaskaydiaCove Nerd Font" "FiraMono Nerd Font" "JetBrainsMono Nerd Font" "Mononoki Nerd Font" "VictorMono Nerd Font" "RobotoMono Nerd Font" "DejaVuSansMono Nerd Font" "UbuntuMono Nerd Font" "AnonymousPro Nerd Font" "Terminus Nerd Font")
 else
@@ -409,6 +387,7 @@ else
         9) FONT="UbuntuMono Nerd Font" ;;
         10) FONT="AnonymousPro Nerd Font" ;;
         11) FONT="Terminus Nerd Font" ;;
+        *) echo "Choix invalide"; exit 1 ;;
     esac
 fi
 
@@ -444,14 +423,13 @@ case $FONT in
     "Terminus Nerd Font")
         install_font "https://github.com/adi1090x/termux-style/raw/master/fonts/TerminusNerdFont.ttf"
         ;;
+    "Police par défaut")
+        echo "Police déjà installée."
+        ;;
+    *)
+        echo "Police non reconnue : $FONT"
+        ;;
 esac
-
-# Fonction pour installer les polices
-install_font() {
-    local font_url="$1"
-    echo "Téléchargement et installation de la police depuis $font_url..."
-    curl -L -o "$HOME/.termux/font.ttf" "$font_url"
-}
 
 # Menu interactif pour sélectionner les packages à installer
 show_banner
@@ -638,6 +616,7 @@ show_en_banner() {
         echo "DEBIAN (CLI) : debian"
         echo
     fi
+}
 
 show_end_banner
 if $USE_GUM; then
