@@ -334,7 +334,7 @@ if $USE_GUM; then
         show_banner
         # Ajout du menu pour exécuter Oh-My-Termux
         if gum confirm "Exécuter OhMyTermux ?"; then
-            exec $SHELL
+            exec $shell_choice
         else
             echo "OhMyTermux sera actif au prochain démarrage de Termux."
         fi
@@ -348,7 +348,7 @@ else
         echo "Exécuter OhMyTermux ? (o/n)"
         read choice
         if [ "$choice" = "o" ]; then
-            exec $SHELL
+            exec $shell_choice
         else
             echo "OhMyTermux sera actif au prochain démarrage de Termux."
         fi
