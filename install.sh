@@ -1,4 +1,4 @@
-5#!/bin/bash
+#!/bin/bash
 
 clear
 
