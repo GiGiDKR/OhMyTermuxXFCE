@@ -64,10 +64,10 @@ alias bashconfig='nano $PREFIX/etc/bash.bashrc'
 
 # Téléchargement de l'image de fond
 if command -v gum &> /dev/null; then
-    gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/mac_waves.png
+    gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png
 else
     echo "Téléchargement du fond d'écran..."
-    wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/mac_waves.png
+    wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png
 fi
 mv mac_waves.png $PREFIX/share/backgrounds/xfce/
 
@@ -99,10 +99,10 @@ rm 2024-02-25.zip
 
 # Configuration
 if command -v gum &> /dev/null; then
-    gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/config.zip
+    gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip
 else
     echo "Installation des fichiers de configuration..."
-    wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/config.zip
+    wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip
 fi
 unzip config.zip
 rm config.zip
