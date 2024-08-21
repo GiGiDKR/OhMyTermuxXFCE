@@ -169,7 +169,6 @@ case $shell_choice in
         echo "Bash sélectionné, poursuite du script..."
         ;;
     "zsh")
-        echo "ZSH sélectionné. Installation de ZSH..."
         if $USE_GUM; then
             gum spin --title "Installation de ZSH..." -- pkg install -y zsh
         else
@@ -341,10 +340,14 @@ fi
         chsh -s zsh
         ;;
     "fish")
-        echo "Fish sélectionné. Installation de Fish..."
-        pkg install -y fish
-        chsh -s fish
+        if $USE_GUM; then
+            gum spin --title "Installation de Fish..." -- pkg install -y fish
+        else
+            echo "Installation de Fish..."
+            pkg install -y fish
+        fi
         # TODO : ajouter la configuration de Fish, de ses plugins et des alias (abbr)
+        chsh -s fish
         ;;
 esac
 
