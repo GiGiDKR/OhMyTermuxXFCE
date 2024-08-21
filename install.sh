@@ -232,34 +232,52 @@ case $shell_choice in
 
         # Installation des plugins
         show_banner
-        if $USE_GUM; then
-            PLUGINS=$(gum choose --no-limit --header="Sélectionner avec espace les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
-        else
-            echo "Sélectionner les plugins à installer (séparés par des espaces) :"
-            echo "1) zsh-autosuggestions"
-            echo "2) zsh-syntax-highlighting"
-            echo "3) zsh-completions"
-            echo "4) you-should-use"
-            echo "5) zsh-abbr"
-            echo "6) zsh-alias-finder"
-            echo "7) Tout installer"
-            read -p "Entrez les numéros des plugins : " plugin_choices
-            # Convertir les choix en noms de plugins
-            PLUGINS=""
-            for choice in $plugin_choices; do
-                case $choice in
-                    1) PLUGINS+="zsh-autosuggestions " ;;
-                    2) PLUGINS+="zsh-syntax-highlighting " ;;
-                    3) PLUGINS+="zsh-completions " ;;
-                    4) PLUGINS+="you-should-use " ;;
-                    5) PLUGINS+="zsh-abbr " ;;
-                    6) PLUGINS+="zsh-alias-finder " ;;
-                    7) PLUGINS="zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use zsh-abbr zsh-alias-finder" ;;
-                esac
-            done
-        fi
+        # Fonction pour afficher la liste des plugins et obtenir la sélection
+select_plugins() {
+    if $USE_GUM; then
+        PLUGINS=$(gum choose --no-limit --header="Sélectionner avec espace les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
+    else
+        echo "Sélectionner les plugins à installer (séparés par des espaces) :"
+        echo "1) zsh-autosuggestions"
+        echo "2) zsh-syntax-highlighting"
+        echo "3) zsh-completions"
+        echo "4) you-should-use"
+        echo "5) zsh-abbr"
+        echo "6) zsh-alias-finder"
+        echo "7) Tout installer"
+        read -p "Entrez les numéros des plugins : " plugin_choices
+        # Convertir les choix en noms de plugins
+        PLUGINS=""
+        for choice in $plugin_choices; do
+            case $choice in
+                1) PLUGINS+="zsh-autosuggestions " ;;
+                2) PLUGINS+="zsh-syntax-highlighting " ;;
+                3) PLUGINS+="zsh-completions " ;;
+                4) PLUGINS+="you-should-use " ;;
+                5) PLUGINS+="zsh-abbr " ;;
+                6) PLUGINS+="zsh-alias-finder " ;;
+                7) PLUGINS="zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use zsh-abbr zsh-alias-finder" ;;
+            esac
+        done
+    fi
+}
 
-        echo "Installation des plugins sélectionnés..."
+# Installation des plugins
+show_banner
+while true; do
+    select_plugins
+    if [ -z "$PLUGINS" ]; then
+        read -p "Aucun plugin sélectionné. Êtes-vous sûr de vouloir continuer ? (o/n) " choice
+        if [[ "$choice" =~ ^[Oo]$ ]]; then
+            break
+        fi
+    else
+        break
+    fi
+done
+
+if command -v gum &> /dev/null; then
+    gum spin --title "Installation des plugins sélectionnés..." -- bash -c '
         for PLUGIN in $PLUGINS; do
             case $PLUGIN in
                 "zsh-autosuggestions")
@@ -282,9 +300,33 @@ case $shell_choice in
                     ;;
             esac
         done
+    '
+else
+    for PLUGIN in $PLUGINS; do
+        case $PLUGIN in
+            "zsh-autosuggestions")
+                git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
+                ;;
+            "zsh-syntax-highlighting")
+                git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" || true
+                ;;
+            "zsh-completions")
+                git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" || true
+                ;;
+            "you-should-use")
+                git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$HOME/.oh-my-zsh/custom/plugins/you-should-use" || true
+                ;;
+            "zsh-abbr")
+                git clone https://github.com/olets/zsh-abbr "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" || true
+                ;;
+            "zsh-alias-finder")
+                git clone https://github.com/akash329d/zsh-alias-finder "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" || true
+                ;;
+        esac
+    done
+fi
 
-        # Télécharger les fichiers de configuration depuis le dépôt GitHub
-        echo "Téléchargement des fichiers de configuration..."
+# Télécharger les fichiers de conf depuis GitHub
         if $USE_GUM; then
             gum spin --title "Téléchargement des fichiers de configuration..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/aliases.zsh
             gum spin --title "Téléchargement du fichier zshrc..." -- curl -fLo "$HOME/.zshrc" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/zshrc
@@ -296,13 +338,11 @@ case $shell_choice in
         fi
 
         echo "alias help='glow \$HOME/.config/OhMyTermux/Help.md'" >> "$HOME/.zshrc"
-        termux-reload-settings
         chsh -s zsh
         ;;
     "fish")
         echo "Fish sélectionné. Installation de Fish..."
         pkg install -y fish
-        termux-reload-settings
         chsh -s fish
         # TODO : ajouter la configuration de Fish, de ses plugins et des alias (abbr)
         ;;
@@ -323,14 +363,14 @@ show_banner
 
 if $USE_GUM; then
     gum spin --title "Téléchargement de la police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
-    gum spin --title "Téléchargement des thèmes Color Scheme..." -- bash -c '
+    gum spin --title "Téléchargement des thèmes..." -- bash -c '
         curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip &&
         unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
     '
 else
     echo "Téléchargement de la police par défaut..."
     curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
-    echo "Téléchargement des thèmes Color Scheme..."
+    echo "Téléchargement des thèmes..."
     curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
     unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 fi
@@ -473,8 +513,10 @@ if $USE_GUM; then
     if ! gum confirm "    Installer OhMyTermux XFCE ?"; then
         show_banner
         if gum confirm "    Exécuter OhMyTermux ?"; then
+            termux-reload-settings
             exec $shell_choice
         else
+            termux-reload-settings
             echo "OhMyTermux sera actif au prochain démarrage de Termux."
         fi
         exit 0
@@ -487,8 +529,10 @@ else
         echo "Exécuter OhMyTermux ? (o/n)"
         read choice
         if [ "$choice" = "o" ]; then
+            termux-reload-settings
             exec $shell_choice
         else
+            termux-reload-settings
             echo "OhMyTermux sera actif au prochain démarrage de Termux."
         fi
         exit 0
@@ -544,10 +588,9 @@ show_banner
 ./utils.sh
 
 show_banner
-echo "Installation de Termux-X11 APK"
-echo ""
 if $USE_GUM; then
     if gum confirm "Installer Termux-X11 ?"; then
+        show_banner
         gum spin --title "Téléchargement de Termux-X11 APK" -- wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
         mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
         termux-open $HOME/storage/downloads/app-arm64-v8a-debug.apk
@@ -557,6 +600,7 @@ else
     echo "Installer Termux-X11 ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
+        show_banner
         echo "Téléchargement de Termux-X11 APK..."
         wget https://github.com/termux/termux-x11/releases/download/nightly/app-arm64-v8a-debug.apk
         mv app-arm64-v8a-debug.apk $HOME/storage/downloads/
@@ -596,17 +640,20 @@ show_en_banner() {
 show_end_banner
 if $USE_GUM; then
     if gum confirm "   Exécuter OhMyTermux ?"; then
+        termux-reload-settings
         exec $shell_choice
     else
+        termux-reload-settings
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 else
     echo "Exécuter OhMyTermux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
-        clear
+        termux-reload-settings
         exec $shell_choice
     else
+        termux-reload-settings
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 fi
