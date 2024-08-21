@@ -490,7 +490,10 @@ fi
 # Confirmation pour installer OhMyTermuxXFCE
 show_banner
 if $USE_GUM; then
-    if ! gum confirm "    Installer OhMyTermux XFCE ?"; then
+    if gum confirm "    Installer OhMyTermux XFCE ?"; then
+        # Demande du nom d'utilisateur avec gum
+        username=$(gum input --placeholder "Entrez votre nom d'utilisateur")
+    else
         show_banner
         if gum confirm "     Exécuter OhMyTermux ?"; then
             termux-reload-settings
@@ -505,7 +508,10 @@ if $USE_GUM; then
 else
     echo "Installer OhMyTermux XFCE ? (o/n)"
     read choice
-    if [ "$choice" != "o" ]; then
+    if [ "$choice" = "o" ]; then
+        # Demande du nom d'utilisateur avec read
+        read -p "Entrez votre nom d'utilisateur : " username
+    else
         show_banner
         echo "Exécuter OhMyTermux ? (o/n)"
         read choice
@@ -521,7 +527,6 @@ else
     fi
 fi
 
-# XFCE
 show_banner
 pkgs=('wget' 'ncurses-utils' 'dbus' 'proot-distro' 'x11-repo' 'tur-repo' 'pulseaudio')
 
@@ -564,9 +569,15 @@ else
 fi
 chmod +x *.sh
 
+# Exécution des scripts avec ou sans gum
 show_banner
-./xfce.sh "$username" --gum
-./proot.sh "$username" --gum
+if $USE_GUM; then
+    ./xfce.sh "$username" --gum
+    ./proot.sh "$username" --gum
+else
+    ./xfce.sh "$username"
+    ./proot.sh "$username"
+fi
 ./utils.sh
 
 show_banner
