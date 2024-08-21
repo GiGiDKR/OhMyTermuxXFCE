@@ -444,15 +444,19 @@ else
     done
 fi
 
-echo "Installation des packages sélectionnés..."
+installed_packages=""
+
 if [ -n "$PACKAGES" ]; then
     for PACKAGE in $PACKAGES; do
-        echo "Installation de $PACKAGE..."
+        show_banner
         if $USE_GUM; then
-            gum spin --title "Téléchargement de $PACKAGE..." -- pkg install -y $PACKAGE
+            gum spin --title "Installation de $PACKAGE..." -- pkg install -y $PACKAGE
         else
+            echo "Installation de $PACKAGE..."
             pkg install -y $PACKAGE
         fi
+        installed_packages+="$PACKAGE installé !\n"
+        echo -e "$installed_packages"
     done
 else
     echo "Aucun package sélectionné. Poursuite du script ..."
