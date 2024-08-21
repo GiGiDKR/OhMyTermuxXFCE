@@ -149,7 +149,7 @@ fi
 # Menu pour choisir le shell
 show_banner
 if $USE_GUM; then
-    shell_choice=$(gum choose --header="Choisissez le shell à installer :" "bash" "zsh" "fish")
+    shell_choice=$(gum choose --height=5 --header="Choisissez le shell à installer :" "bash" "zsh" "fish")
 else
     echo "Choisissez le shell à installer :"
     echo "1) bash"
@@ -448,7 +448,11 @@ echo "Installation des packages sélectionnés..."
 if [ -n "$PACKAGES" ]; then
     for PACKAGE in $PACKAGES; do
         echo "Installation de $PACKAGE..."
-        pkg install -y $PACKAGE
+        if $USE_GUM; then
+            gum spin --title "Téléchargement de $PACKAGE..." -- pkg install -y $PACKAGE
+        else
+            pkg install -y $PACKAGE
+        fi
     done
 else
     echo "Aucun package sélectionné. Poursuite du script ..."
@@ -457,7 +461,7 @@ fi
 # Confirmation pour installer OhMyTermuxXFCE
 show_banner
 if $USE_GUM; then
-    if ! gum confirm "Installer OhMyTermuxXFCE ?"; then
+    if ! gum confirm "Installer OhMyTermux XFCE ?"; then
         show_banner
         if gum confirm "Exécuter OhMyTermux ?"; then
             exec $shell_choice
@@ -467,7 +471,7 @@ if $USE_GUM; then
         exit 0
     fi
 else
-    echo "Installer OhMyTermuxXFCE ? (o/n)"
+    echo "Installer OhMyTermux XFCE ? (o/n)"
     read choice
     if [ "$choice" != "o" ]; then
         show_banner
