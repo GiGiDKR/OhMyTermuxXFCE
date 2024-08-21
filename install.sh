@@ -318,20 +318,23 @@ COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
 # Créer les répertoires
 mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
 
-# Télécharger et extraire les fichiers nécessaires depuis le dépôt GitHub
+# Téléchargement de la police et des thèmes
 show_banner
+
 if $USE_GUM; then
     gum spin --title "Téléchargement de la police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
-    gum spin --title "Téléchargement de l'archive Color Scheme..." -- curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
-    gum spin --title "Décompression de l'archive Color Scheme..." -- unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+    gum spin --title "Téléchargement des thèmes Color Scheme..." -- bash -c '
+        curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip &&
+        unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+    '
 else
     echo "Téléchargement de la police par défaut..."
     curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
-    echo "Téléchargement de l'archive Color Scheme..."
+    echo "Téléchargement des thèmes Color Scheme..."
     curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
-    echo "Décompression de l'archive Color Scheme..."
     unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
 fi
+
 rm "$HOME/.termux/colors.zip"
 
 # Menu interactif pour sélectionner une police à installer
@@ -467,7 +470,7 @@ fi
 # Confirmation pour installer OhMyTermuxXFCE
 show_banner
 if $USE_GUM; then
-    if ! gum confirm "Installer OhMyTermux XFCE ?"; then
+    if ! gum confirm "  Installer OhMyTermux XFCE ?"; then
         show_banner
         if gum confirm "Exécuter OhMyTermux ?"; then
             exec $shell_choice
@@ -477,7 +480,7 @@ if $USE_GUM; then
         exit 0
     fi
 else
-    echo "Installer OhMyTermux XFCE ? (o/n)"
+    echo "  Installer OhMyTermux XFCE ? (o/n)"
     read choice
     if [ "$choice" != "o" ]; then
         show_banner
