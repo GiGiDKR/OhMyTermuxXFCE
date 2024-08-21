@@ -1,6 +1,6 @@
 # OhMyTermux XFCE 🧊
 
-**Automated installation and custom configuration of Termux with an XFCE graphical interface and a customized Debian distribution**
+**Automated and custom installation and configuration of Termux with an XFCE graphical interface and a customized Debian distribution**
 
 
 ## Installation
@@ -23,7 +23,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.
 
 &nbsp;
 
-## About
+## About this program 
 
 🧊 Packages installed :
 
