@@ -597,7 +597,7 @@ rm proot.sh
 rm utils.sh
 rm install.sh
 
-show_en_banner() {
+show_end_banner() {
     clear
     if $USE_GUM; then
         gum style \
