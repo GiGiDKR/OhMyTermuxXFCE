@@ -206,7 +206,7 @@ case $shell_choice in
 
                 show_banner
                 if gum confirm "Installer le prompt OhMyTermux ?"; then
-                    gum spin --title "Téléchargement de la configuration PowerLevel10k..." -- curl -fLo "$HOME/.p10k.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/p10k.zsh
+                    gum spin --title "Téléchargement prompt PowerLevel10k..." -- curl -fLo "$HOME/.p10k.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/p10k.zsh
                 else
                     echo "Vous pouvez configurer le prompt PowerLevel10k manuellement en exécutant 'p10k configure' après l'installation."
                 fi
