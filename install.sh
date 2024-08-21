@@ -446,9 +446,10 @@ fi
 
 installed_packages=""
 
+show_banner 
+
 if [ -n "$PACKAGES" ]; then
     for PACKAGE in $PACKAGES; do
-        show_banner
         if $USE_GUM; then
             gum spin --title "Installation de $PACKAGE..." -- pkg install -y $PACKAGE
         else
@@ -456,6 +457,7 @@ if [ -n "$PACKAGES" ]; then
             pkg install -y $PACKAGE
         fi
         installed_packages+="$PACKAGE installé !\n"
+        show_banner 
         echo -e "$installed_packages"
     done
 else
