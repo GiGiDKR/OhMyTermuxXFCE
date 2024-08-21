@@ -1,4 +1,4 @@
-#!/bin/bash
+5#!/bin/bash
 
 clear
 
@@ -492,8 +492,9 @@ show_banner
 if $USE_GUM; then
     if ! gum confirm "    Installer OhMyTermux XFCE ?"; then
         show_banner
-        if gum confirm "    Exécuter OhMyTermux ?"; then
+        if gum confirm "     Exécuter OhMyTermux ?"; then
             termux-reload-settings
+            clear
             exec $shell_choice
         else
             termux-reload-settings
@@ -510,6 +511,7 @@ else
         read choice
         if [ "$choice" = "o" ]; then
             termux-reload-settings
+            clear
             exec $shell_choice
         else
             termux-reload-settings
@@ -597,30 +599,9 @@ rm proot.sh
 rm utils.sh
 rm install.sh
 
-show_end_banner() {
-    clear
-    if $USE_GUM; then
-        gum style \
-            --foreground 212 \
-            --border-foreground 212 \
-            --align center \
-            --width 40 \
-            --margin "1 1 1 0" \
-            "Installation terminée !" \
-            "Exécuter XFCE4 : start" \
-            "Exécuter DEBIAN : debian"
-    else
-        echo "Installation terminée !"
-        echo
-        echo "XFCE4 (GUI) : start"
-        echo "DEBIAN (CLI) : debian"
-        echo
-    fi
-}
-
-show_end_banner
+show_banner
 if $USE_GUM; then
-    if gum confirm "   Exécuter OhMyTermux ?"; then
+    if gum confirm "    Exécuter OhMyTermux ?"; then
         termux-reload-settings
         clear
         exec $shell_choice
