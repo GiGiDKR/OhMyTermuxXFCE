@@ -39,7 +39,7 @@ show_banner() {
             --border double \
             --align center \
             --width 40 \
-            --margin "1 2" \
+            --margin "1 1 1 0" \
             "OHMYTERMUX" \
             "XFCE"
     else
@@ -581,7 +581,7 @@ show_en_banner() {
             --border-foreground 212 \
             --align center \
             --width 40 \
-            --margin "1 2" \
+            --margin "1 1 1 0" \
             "Installation terminée !" \
             "Exécuter XFCE4 : start" \
             "Exécuter DEBIAN : debian"
