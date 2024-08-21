@@ -52,9 +52,9 @@ Automated installation and configuration of Termux.
 
   
 
-🧊 Configuration ZSH : 
+🧊🧊 Configuration ZSH : 
 
-Installation of [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh) with useful plugins (select from a list) :
+Installation of [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh) with useful optional plugins :
 
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 
