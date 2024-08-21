@@ -63,8 +63,8 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.
 
   🧊 Configuration Fish : 
   
-   - [Fisher](https://github.com/jorgebucaran/fisher)
    - [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
+   - [Fisher](https://github.com/jorgebucaran/fisher)
    - [Pure](https://github.com/pure-fish/pure)
    - [Fishline](https://github.com/0rax/fishline)
    - [Virtualfish](https://github.com/justinmayer/virtualfish)
