@@ -643,6 +643,7 @@ show_end_banner
 if $USE_GUM; then
     if gum confirm "   Exécuter OhMyTermux ?"; then
         termux-reload-settings
+        clear
         exec $shell_choice
     else
         termux-reload-settings
@@ -653,6 +654,7 @@ else
     read choice
     if [ "$choice" = "o" ]; then
         termux-reload-settings
+        clear
         exec $shell_choice
     else
         termux-reload-settings
