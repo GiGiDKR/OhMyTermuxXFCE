@@ -456,7 +456,7 @@ if [ -n "$PACKAGES" ]; then
             echo "Installation de $PACKAGE..."
             pkg install -y $PACKAGE
         fi
-        installed_packages+="$PACKAGE installé !\n"
+        installed_packages+="Installé : $PACKAGE\n\n"
         show_banner 
         echo -e "$installed_packages"
     done
