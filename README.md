@@ -1,4 +1,4 @@
-# OhMyTermuxXFCE 🧊
+# OhMyTermux XFCE 🧊
 
 Automated installation and configuration of Termux.
 
