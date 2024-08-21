@@ -1,8 +1,26 @@
 #!/bin/bash
 
-clear
+# Fonction pour afficher la bannière avec ou sans gum
+show_banner() {
+    clear
+    if $USE_GUM; then
+        gum style \
+            --foreground 212 \
+            --border-foreground 212 \
+            --border double \
+            --align center \
+            --width 40 \
+            --margin "1 2" \
+            "OHMYTERMUX" \
+            "XFCE"
+    else
+        echo "OHMYTERMUX - XFCE"
+        echo ""
+    fi
+}
 
 # Installation de gum
+show_banner
 if ! command -v gum &> /dev/null; then
     echo "Installation de gum..."
     pkg update -y
@@ -14,7 +32,8 @@ username="$1"
 # Liste des paquets nécessaires
 pkgs=('git' 'virglrenderer-android' 'papirus-icon-theme' 'xfce4' 'xfce4-goodies' 'eza' 'pavucontrol-qt' 'bat' 'jq' 'nala' 'wmctrl' 'firefox' 'netcat-openbsd' 'termux-x11-nightly' 'eza')
 
-# Vérifier si gum est installé et utiliser echo si ce n'est pas le cas
+# Installation des paquets nécessaires
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y
 else
@@ -23,10 +42,12 @@ else
 fi
 
 # Placer l'icône de Firefox sur le bureau
+show_banner
 cp $PREFIX/share/applications/firefox.desktop $HOME/Desktop 
 chmod +x $HOME/Desktop/firefox.desktop
 
 # Définir les alias
+show_banner
 echo "
 # Aliases
 alias l='eza --icons'
@@ -63,6 +84,7 @@ alias bashconfig='nano $PREFIX/etc/bash.bashrc'
 " >> $PREFIX/etc/bash.bashrc
 
 # Téléchargement de l'image de fond
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png
 else
@@ -72,6 +94,7 @@ fi
 mv mac_waves.png $PREFIX/share/backgrounds/xfce/
 
 # Installation du thème WhiteSur-Dark
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation du thème WhiteSur-Dark" -- wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2024-05-01.zip
 else
@@ -85,6 +108,7 @@ rm -rf WhiteSur*
 rm 2024-05-01.zip
 
 # Installation du thème d'icônes Fluent Cursor
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation du thème Fluent Cursor" -- wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2024-02-25.zip
 else
@@ -98,6 +122,7 @@ rm -rf $HOME/Fluent*
 rm 2024-02-25.zip
 
 # Configuration
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip
 else
