@@ -67,10 +67,8 @@ trap finish EXIT
 
 clear
 
-# Appel de la fonction pour vérifier et installer gum
 check_and_install_gum
 
-# Afficher la bannière
 show_banner
 
 # Vérification et création du fichier colors.properties si nécessaire
@@ -196,9 +194,8 @@ case $shell_choice in
             gum spin --title "Installation de PowerLevel10k..." -- git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" || true
             echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >> "$HOME/.zshrc"
 
-            # Demander à l'utilisateur de choisir la configuration du prompt
             show_banner
-            if gum confirm "Installer le prompt OhMyTermux PowerLevel10k ?"; then
+            if gum confirm "Installer le prompt OhMyTermux ?"; then
                 gum spin --title "Téléchargement de la configuration PowerLevel10k..." -- curl -fLo "$HOME/.p10k.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermux/main/p10k.zsh
             else
                 echo "Vous pouvez configurer le prompt PowerLevel10k manuellement en exécutant 'p10k configure' après l'installation."
@@ -464,10 +461,9 @@ fi
 show_banner
 if $USE_GUM; then
     if gum confirm "Exécuter OhMyTermux ?"; then
-        clear
-        termux-reload-settings
-        exec $SHELL
+        exec $shell_choice
     else
+        show_banner
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 else
@@ -475,9 +471,9 @@ else
     read choice
     if [ "$choice" = "o" ]; then
         clear
-        termux-reload-settings
-        exec $SHELL
+        exec $shell_choice
     else
+        show_banner
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 fi
