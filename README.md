@@ -12,6 +12,15 @@
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh --gum
 
 ```
+
+To install without [gum](https://github.com/charmbracelet/gum)
+```bash
+
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh
+
+```
+
+
 &nbsp;
 
 ## About
