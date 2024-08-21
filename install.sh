@@ -204,7 +204,7 @@ case $shell_choice in
                 echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >> "$HOME/.zshrc"
 
                 show_banner
-                if gum confirm "Installer le prompt OhMyTermux ?"; then
+                if gum confirm "  Installer le prompt OhMyTermux ?"; then
                     gum spin --title "Téléchargement prompt PowerLevel10k..." -- curl -fLo "$HOME/.p10k.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/p10k.zsh
                 else
                     echo "Vous pouvez configurer le prompt PowerLevel10k manuellement en exécutant 'p10k configure' après l'installation."
@@ -221,7 +221,7 @@ case $shell_choice in
                 echo "Installer le prompt OhMyTermux ? (o/n)"
                 read choice
                 if [ "$choice" = "o" ]; then
-                    echo "Téléchargement de la configuration PowerLevel10k..."
+                    echo "Téléchargement du prompt PowerLevel10k..."
                     curl -fLo "$HOME/.p10k.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/p10k.zsh
                 else
                     echo "Vous pouvez configurer le prompt PowerLevel10k manuellement en exécutant 'p10k configure' après l'installation."
@@ -229,9 +229,8 @@ case $shell_choice in
             fi
         fi
 
-        # Installation des plugins
-        show_banner
-        # Fonction pour afficher la liste des plugins et obtenir la sélection
+# Installation des plugins
+show_banner
 select_plugins() {
     if $USE_GUM; then
         PLUGINS=$(gum choose --no-limit --header="Sélectionner avec espace les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
