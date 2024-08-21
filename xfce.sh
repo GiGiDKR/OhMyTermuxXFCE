@@ -19,6 +19,8 @@ show_banner() {
     fi
 }
 
+clear
+
 # Installation de gum
 show_banner
 if ! command -v gum &> /dev/null; then
