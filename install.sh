@@ -297,27 +297,34 @@ fi
 for PLUGIN in $PLUGINS; do
   case $PLUGIN in
     "zsh-autosuggestions")
+      show_banner
       git clone https://github.com/zsh-users/zsh-autosuggestions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" || true
       ;;
     "zsh-syntax-highlighting")
+      show_banner
       git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" || true
       ;;
     "zsh-completions")
+      show_banner
       git clone https://github.com/zsh-users/zsh-completions.git "$HOME/.oh-my-zsh/custom/plugins/zsh-completions" || true
       ;;
     "you-should-use")
+      show_banner
       git clone https://github.com/MichaelAquilina/zsh-you-should-use.git "$HOME/.oh-my-zsh/custom/plugins/you-should-use" || true
       ;;
     "zsh-abbr")
+      show_banner
       git clone https://github.com/olets/zsh-abbr "$HOME/.oh-my-zsh/custom/plugins/zsh-abbr" || true
       ;;
     "zsh-alias-finder")
+      show_banner
       git clone https://github.com/akash329d/zsh-alias-finder "$HOME/.oh-my-zsh/custom/plugins/zsh-alias-finder" || true
       ;;
   esac
 done
 
 # Télécharger les fichiers de conf depuis GitHub
+        show_banner
         if $USE_GUM; then
             gum spin --title "Téléchargement des fichiers de configuration..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/aliases.zsh
             gum spin --title "Téléchargement du fichier zshrc..." -- curl -fLo "$HOME/.zshrc" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/zshrc
