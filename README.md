@@ -1,138 +1,104 @@
 # OhMyTermux XFCE 🧊
 
-Automated installation and configuration of Termux.
+**Automated installation and configuration of Termux**
 
-  
-  
 
-🧊 Packages installed :
+## Installation
 
-- [wget](https://github.com/mirror/wget)
-
-- [curl](https://github.com/curl/curl)
-
-- [git](https://github.com/git/git)
-
-- [zsh](https://github.com/zsh-users/zsh)
-
-- unzip
-
-  
-
-🧊 Optional packages (with individual selection) :
-
-- [nala](https://github.com/volitank/nala)
-
-- [eza](https://github.com/eza-community/eza)
-
-- [lsd](https://github.com/lsd-rs/lsd)
-
-- [bat](https://github.com/sharkdp/bat)
-
-- [lf](https://github.com/gokcehan/lf)
-
-- [fzf](https://github.com/junegunn/fzf)
-
-- [glow](https://github.com/charmbracelet/glow)
-
-- [python](https://github.com/python)
-
-- [micro](https://github.com/zyedidia/micro)
-
-  
-
-🧊 Shell selection: 
-* [Bash](https://git.savannah.gnu.org/cgit/bash.git/=) (Custom [configuration])
-* [ZSH](https://www.zsh.org/) (Custom [configuration])
-* [Fish](https://github.com/fish-shell/fish-shell) (Custom [configuration])
-
-- Custom aliases
-
-- Symlink to internal storage user directories
-
-  
-
-🧊🧊 Configuration ZSH : 
-
-Installation of [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh) with useful optional plugins :
-
-- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-
-- [zsh-completions](https://github.com/zsh-users/zsh-completions)
-
-- [zsh-you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use)
-
-- [zsh-abbr](https://github.com/olets/zsh-abbr)
-
-- [zsh-alias-finder](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder)
-
-  
-
-🧊 Configuring Termux Display :
-
-- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) 
-
-- [Color Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes)
-
-- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
-
-  
-
-🧊 Directory of various scipts :
-
-- Theme Selector
-
-- Nerd Fonts Installer
-
-- Custom Debian proot-distro with XFCE4 on Termux-X11
-
-- App-Installer (VSCODE, PyCharm, Obsidian ...)
-
-- Native Termux XFCE4 on Termux-X11
-
-- Oh-My-Zsh (Default installation)
-
-- Oh-My-Posh
-
-- Electron (in Termux)
-
-- XDRP (native Termux or proot-distro)
-
-  
-
------
-
-Sets up a termux XFCE desktop and a Debian proot install. This setup uses Termux-X11, the termux-x11 server will be installed and you will be prompted to allow termux to install the Android APK.
-
-  
-
-You only need to pick your username and follow the prompts. This will take roughly 4GB of storage space. Please note, this can be a lengthy process. Keep in mind that as you install applications, they will consume more storage space.
-
-  
-
-Please read the whole Readme for more information about this setup.  
-
-  
-
-# Installation
-
-  
-
-🧊 To install with [gum](https://github.com/charmbracelet/gum)
-
-  
+🔥 To install with [gum](https://github.com/charmbracelet/gum)
 
 ```bash
 
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh --gum
 
 ```
+&nbsp;
+
+## About
+
+🧊 Packages installed :
+
+- [wget](https://github.com/mirror/wget)
+- [curl](https://github.com/curl/curl)
+- [git](https://github.com/git/git)
+- [zsh](https://github.com/zsh-users/zsh)
+- unzip
+
+🧊 Individually selectable packages :
+
+- [nala](https://github.com/volitank/nala)
+- [eza](https://github.com/eza-community/eza)
+- [lsd](https://github.com/lsd-rs/lsd)
+- [bat](https://github.com/sharkdp/bat)
+- [lf](https://github.com/gokcehan/lf)
+- [fzf](https://github.com/junegunn/fzf)
+- [glow](https://github.com/charmbracelet/glow)
+- [python](https://github.com/python)
+- [micro](https://github.com/zyedidia/micro)
 
 
+🧊 Shell selection: 
+* [Bash](https://git.savannah.gnu.org/cgit/bash.git/=)
+* [ZSH](https://www.zsh.org/)
+* [Fish](https://github.com/fish-shell/fish-shell)
+
+
+  🧊 Configuration ZSH : 
+
+    - **[Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh)**
+    - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+    - [zsh-completions](https://github.com/zsh-users/zsh-completions)
+    - [zsh-you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use)
+    - [zsh-abbr](https://github.com/olets/zsh-abbr)
+    - [zsh-alias-finder](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder)
+
+  🧊 Configuration Fish : 
   
-  
+   - [Fisher](https://github.com/jorgebucaran/fisher)
+   - [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
+   - [Pure](https://github.com/pure-fish/pure)
+   - [Fishline](https://github.com/0rax/fishline)
+   - [Virtualfish](https://github.com/justinmayer/virtualfish)
+   - [Fish Abbreviation Tips](https://github.com/gazorby/fish-abbreviation-tips)
+   - [Bang-Bang](https://github.com/oh-my-fish/plugin-bang-bang)
+   - [Fish You Should Use](https://github.com/paysonwallach/fish-you-should-use)
+   - [Catppuccin for Fish](https://github.com/catppuccin/fish)
 
-# Starting the desktop
+🧊 Configuring Termux Display :
+
+- [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) 
+- [Color Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes)
+- [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
+
+🧊 Helpful Termux configuration :
+
+- Custom aliases
+- Symlink to internal storage user directories
+
+🧊 Directory of various scipts :
+
+- Theme Selector
+- Nerd Fonts Installer
+- Custom Debian proot-distro with XFCE4 on Termux-X11
+- App-Installer (VSCODE, PyCharm, Obsidian ...)
+- Native Termux XFCE4 on Termux-X11
+- Oh-My-Zsh (Default installation)
+- Oh-My-Posh
+- Electron (in Termux)
+- XDRP (native Termux or proot-distro)
+
+🔥 **XFCE and Debian :**
+
+Sets up a termux XFCE desktop and a Debian proot install.
+This setup uses Termux-X11, the termux-x11 server will be installed and you will be prompted to allow termux to install the Android APK.
+You only need to pick your username and follow the prompts.
+
+> [!NOTE]
+> This will take roughly 4GB of storage space
+
+---
+
+## Starting the desktop
 
   
 
@@ -156,7 +122,7 @@ Also note, you do not need to set display in Debian proot as it is already set. 
 
   
 
-# Hardware Acceleration & Proot
+## Hardware Acceleration & Proot
 
   
 
@@ -214,7 +180,7 @@ There are two scripts available for this setup as well
 
   
 
-# Process completed (signal 9) - press Enter
+## Process completed (signal 9) - press Enter
 
   
 
