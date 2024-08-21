@@ -8,18 +8,21 @@
 🔥 To install with [gum](https://github.com/charmbracelet/gum)
 
 ```bash
-
-curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh --gum
-
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -o install.sh && chmod +x install.sh && ./install.sh --gum
 ```
 
-Or without [gum](https://github.com/charmbracelet/gum)
+Or install without [gum](https://github.com/charmbracelet/gum)
 ```bash
-
-curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install_gum.sh -o install_gum.sh && chmod +x install_gum.sh && ./install_gum.sh
-
+curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -o install.sh && chmod +x install.sh && ./install.sh
 ```
-
+## To Do
+- [X] Functional version 1.0 available
+- [X] Mise à jour de README.md
+- [ ] Integrate Fish configuration (Plugins, Prompts, Alias)
+- [ ] Add more selectable packages and selection of Python modules
+- [ ] Integrate the theme selection script (Color schemes)
+- [ ] Separate XFCE and Debian distribution installation to run native Termux graphically
+- [ ] Added selectable options for Debian (Themes, Fonts, Wallpapers)
 
 &nbsp;
 
@@ -102,7 +105,7 @@ Sets up a termux XFCE desktop and a Debian proot install.
 This setup uses Termux-X11, the termux-x11 server will be installed and you will be prompted to allow termux to install the Android APK.
 You only need to pick your username and follow the prompts.
 
-> [!NOTE]
+> [!IMPORTANT]
 > This will take roughly 4GB of storage space
 
 ---
