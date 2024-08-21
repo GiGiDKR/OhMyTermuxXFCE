@@ -459,7 +459,7 @@ if [ -n "$PACKAGES" ]; then
             echo "Installation de $PACKAGE..."
             pkg install -y $PACKAGE
         fi
-        installed_packages+="Installé : $PACKAGE\n\n"
+        installed_packages+="Installé : $PACKAGE\n"
         show_banner 
         echo -e "$installed_packages"
     done
@@ -470,9 +470,9 @@ fi
 # Confirmation pour installer OhMyTermuxXFCE
 show_banner
 if $USE_GUM; then
-    if ! gum confirm "  Installer OhMyTermux XFCE ?"; then
+    if ! gum confirm "    Installer OhMyTermux XFCE ?"; then
         show_banner
-        if gum confirm "Exécuter OhMyTermux ?"; then
+        if gum confirm "    Exécuter OhMyTermux ?"; then
             exec $shell_choice
         else
             echo "OhMyTermux sera actif au prochain démarrage de Termux."
@@ -480,7 +480,7 @@ if $USE_GUM; then
         exit 0
     fi
 else
-    echo "  Installer OhMyTermux XFCE ? (o/n)"
+    echo "Installer OhMyTermux XFCE ? (o/n)"
     read choice
     if [ "$choice" != "o" ]; then
         show_banner
@@ -495,7 +495,7 @@ else
     fi
 fi
 
-# Continuer le script tel qu'il est
+# XFCE
 show_banner
 pkgs=('wget' 'ncurses-utils' 'dbus' 'proot-distro' 'x11-repo' 'tur-repo' 'pulseaudio')
 
