@@ -1,6 +1,6 @@
 # OhMyTermux XFCE 🧊
 
-**Automated and custom installation and configuration of Termux with an XFCE graphical interface and a customized Debian distribution**
+**Automated and custom installation and configuration of Termux with an XFCE graphical interface and a customized Debian distribution.**
 
 
 ## Installation
