@@ -524,14 +524,12 @@ else
 fi
 
 show_banner
-echo "Création des répertoires utilisateur..."
-mkdir -p $HOME/Desktop
-
-show_banner
 if $USE_GUM; then
-    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce.sh
-    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot.sh
-    gum spin --title "Téléchargement des scripts" -- wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/utils.sh
+    gum spin --title "Téléchargement des scripts" -- bash -c "
+        wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce.sh &&
+        wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/proot.sh &&
+        wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/utils.sh
+    "
 else
     echo "Téléchargement des scripts..."
     wget https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/xfce.sh
