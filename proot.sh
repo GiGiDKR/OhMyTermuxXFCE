@@ -1,8 +1,28 @@
 #!/bin/bash
 
+# Fonction pour afficher la bannière avec ou sans gum
+show_banner() {
+    clear
+    if $USE_GUM; then
+        gum style \
+            --foreground 212 \
+            --border-foreground 212 \
+            --border double \
+            --align center \
+            --width 40 \
+            --margin "1 2" \
+            "OHMYTERMUX" \
+            "XFCE"
+    else
+        echo "OHMYTERMUX - XFCE"
+        echo ""
+    fi
+}
+
 clear
 
 # Installation de gum
+show_banner
 if ! command -v gum &> /dev/null; then
     echo "Installation de gum..."
     pkg update -y
@@ -29,6 +49,7 @@ username="$1"
 pkgs_proot=('sudo' 'wget' 'nala' 'jq')
 
 # Vérifier si gum est installé et utiliser echo si ce n'est pas le cas
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation de Debian proot" -- pd install debian
 else
@@ -37,6 +58,7 @@ else
 fi
 
 # Mise à jour des paquets
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Mise à jour des paquets" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 apt update
 else
@@ -46,6 +68,7 @@ fi
 pd login debian --shared-tmp -- env DISPLAY=:1.0 apt upgrade -y
 
 # Installation des paquets
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation des paquets" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 apt install "${pkgs_proot[@]}" -y
 else
@@ -54,6 +77,7 @@ else
 fi
 
 # Création de l'utilisateur
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Création de l'utilisateur" -- {
         pd login debian --shared-tmp -- env DISPLAY=:1.0 groupadd storage
@@ -68,6 +92,7 @@ else
 fi
 
 # Ajout de l'utilisateur à sudoers
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Ajout à sudoers" -- {
         chmod u+rw $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
@@ -82,9 +107,13 @@ else
 fi
 
 # Configuration de l'affichage proot
+show_banner
+echo "Configuration de l'affichage proot..."
 echo "export DISPLAY=:1.0" >> $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc
 
 # Configuration des alias proot
+show_banner
+echo "Configuration des alias proot..."
 echo "
 alias zink='MESA_LOADER_DRIVER_OVERRIDE=zink TU_DEBUG=noconform '
 alias hud='GALLIUM_HUD=fps '
@@ -115,11 +144,15 @@ alias bashconfig='nano $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home
 " >> $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.bashrc
 
 # Configuration du fuseau horaire proot
+show_banner
+echo "Configuration du fuseau horaire proot..."
 timezone=$(getprop persist.sys.timezone)
 pd login debian --shared-tmp -- env DISPLAY=:1.0 rm /etc/localtime
 pd login debian --shared-tmp -- env DISPLAY=:1.0 cp /usr/share/zoneinfo/$timezone /etc/localtime
 
 # Application du thème de xfce à proot
+show_banner
+echo "Application du thème de xfce à proot..."
 cd $PREFIX/share/icons
 find dist-dark | cpio -pdm $PREFIX/var/lib/proot-distro/installed-rootfs/debian/usr/share/icons
 
@@ -131,6 +164,7 @@ mkdir -p $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.fo
 mkdir -p $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.themes/
 
 # Configuration de l'accélération matérielle
+show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Téléchargement de mesa-vulkan-kgsl" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb
 else
