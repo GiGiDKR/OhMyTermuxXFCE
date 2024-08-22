@@ -5,7 +5,7 @@
 
 ## Installation
 
-🔥 To install with [gum](https://github.com/charmbracelet/gum)
+🧊 To install with [gum](https://github.com/charmbracelet/gum)
 
 ```bash
 curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -o install.sh && chmod +x install.sh && ./install.sh --gum
