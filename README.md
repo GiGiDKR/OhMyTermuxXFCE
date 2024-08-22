@@ -19,9 +19,9 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 - [X] Functional version 1.0 available
 - [X] Mise à jour de README.md
 - [ ] Integrate Fish configuration (Plugins, Prompts, Alias)
-- [ ] Add more selectable packages and selection of Python modules
+- [ ] Add more selectable packages Python modules
 - [ ] Integrate the theme selection script (Color schemes)
-- [ ] Separate XFCE and Debian distribution installation to run native Termux graphically
+- [ ] Separate XFCE and Debian install to run native Termux XFCE
 - [ ] Added selectable options for Debian (Themes, Fonts, Wallpapers)
 
 &nbsp;
