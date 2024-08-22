@@ -1,6 +1,7 @@
 #!/bin/bash
 
-bash_bannerr() {
+# Fonction pour afficher la bannière sans gum
+bash_banner() {
 	clear
 	COLOR="\e[38;5;212m"
 
@@ -10,13 +11,17 @@ bash_bannerr() {
 	TEXT_LINE="║              OHMYTERMUX                ║"
 	SUBTEXT_LINE="║                 XFCE                   ║"
 
+	echo
 	echo -e "${COLOR}${TOP_BORDER}"
 	echo -e "${COLOR}${EMPTY_LINE}"
 	echo -e "${COLOR}${TEXT_LINE}"
 	echo -e "${COLOR}${SUBTEXT_LINE}"
 	echo -e "${COLOR}${EMPTY_LINE}"
 	echo -e "${COLOR}${BOTTOM_BORDER}\e[0m"
+	echo
 }
+
+bash_banner
 
 echo "Changer le répertoire de sources Termux ? (o/n)"
 read change_repo_choice
@@ -60,8 +65,7 @@ show_banner() {
             "OHMYTERMUX" \
             "XFCE"
     else
-        echo "OHMYTERMUX - XFCE"
-        echo ""
+       bash_banner
     fi
 }
 
