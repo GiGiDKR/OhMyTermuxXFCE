@@ -613,22 +613,18 @@ rm install.sh
 show_banner
 if $USE_GUM; then
     if gum confirm "    Exécuter OhMyTermux ?"; then
-        termux-reload-settings
         clear
         exec $shell_choice
     else
-        termux-reload-settings
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 else
     echo "Exécuter OhMyTermux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
-        termux-reload-settings
         clear
         exec $shell_choice
     else
-        termux-reload-settings
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 fi
