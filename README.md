@@ -21,7 +21,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 - [ ] Integrate Fish configuration (Plugins, Prompts, Alias)
 - [ ] Add more selectable packages Python modules
 - [ ] Integrate the theme selection script (Color schemes)
-- [ ] Separate XFCE and Debian install to run native Termux XFCE
+- [ ] Separate XFCE / Debian install to run native Termux XFCE
 - [ ] Added selectable options for Debian (Themes, Fonts, Wallpapers)
 
 &nbsp;
