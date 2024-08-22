@@ -22,7 +22,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 - [ ] Add more selectable packages Python modules
 - [ ] Integrate the theme selection script (Color schemes)
 - [ ] Separate XFCE / Debian install to run native Termux XFCE
-- [ ] Added selectable options for Debian (Themes, Fonts, Wallpapers)
+- [ ] Added options for Debian (Themes, Fonts, Wallpapers)
 
 &nbsp;
 
