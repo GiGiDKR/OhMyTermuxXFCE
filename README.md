@@ -85,7 +85,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 🧊 Helpful Termux configuration :
 
 - Custom aliases
-- Symlink to internal storage user directories[^1]
+- Symlink to internal storage user directories [^1]
 
 [^1]: Coming in version 1.1 
 
@@ -231,3 +231,5 @@ You can also run adb shell from termux directly by following the guide found in 
 - Version 1.0.2 :
 - Version 1.0.3 :
 - Version 1.0.4 :
+
+---
