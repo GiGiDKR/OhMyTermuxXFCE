@@ -28,7 +28,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 
 ## About this program 
 
-🧊 Packages installed :
+🧊 **Packages installed :**
 
 - [wget](https://github.com/mirror/wget)
 - [curl](https://github.com/curl/curl)
@@ -36,7 +36,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 - [zsh](https://github.com/zsh-users/zsh)
 - unzip
 
-🧊 Individually selectable packages :
+🧊 **Individually selectable packages :**
 
 - [nala](https://github.com/volitank/nala)
 - [eza](https://github.com/eza-community/eza)
@@ -49,14 +49,14 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 - [micro](https://github.com/zyedidia/micro)
 
 
-🧊 Shell selection :
+🧊 **Shell selection :**
 
 - [Bash](https://git.savannah.gnu.org/cgit/bash.git/)
 - [ZSH](https://www.zsh.org/)
 - [Fish](https://github.com/fish-shell/fish-shell)
 
 
-  🧊 Configuration ZSH : 
+  🧊 **Configuration ZSH :**
 
     - **[Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh)**
     - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
@@ -65,7 +65,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
     - [zsh-abbr](https://github.com/olets/zsh-abbr)
     - [zsh-alias-finder](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder)
 
-  🧊 Configuration Fish [^1] : 
+  🧊 **Configuration Fish [^1] :**
   
    - [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
    - [Fisher](https://github.com/jorgebucaran/fisher)
@@ -77,20 +77,20 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
    - [Fish You Should Use](https://github.com/paysonwallach/fish-you-should-use)
    - [Catppuccin for Fish](https://github.com/catppuccin/fish)
 
-🧊 Configuring Termux Display :
+🧊 **Configuring Termux Display :**
 
 - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) 
 - [Color Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes)
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k)
 
-🧊 Helpful Termux configuration :
+🧊 **Helpful Termux configuration :**
 
 - Custom aliases
 - Symlink to internal storage user directories [^1]
 
 [^1]: Coming in version 1.1 
 
-🧊 Directory of various scipts :
+🧊 **Directory of various scipts :**
 
 - Theme Selector
 - Nerd Fonts Installer
