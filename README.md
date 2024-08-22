@@ -58,7 +58,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 
   🧊 **Configuration ZSH :**
 
-    - **[Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh)**
+    - [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh)
     - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
     - [zsh-completions](https://github.com/zsh-users/zsh-completions)
     - [zsh-you-should-use](https://github.com/MichaelAquilina/zsh-you-should-use)
