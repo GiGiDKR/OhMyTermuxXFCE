@@ -85,7 +85,9 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 🧊 Helpful Termux configuration :
 
 - Custom aliases
-- Symlink to internal storage user directories
+- Symlink to internal storage user directories [^]
+
+[^] Coming in version 1.1 
 
 🧊 Directory of various scipts :
 
