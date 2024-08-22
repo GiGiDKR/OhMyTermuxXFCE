@@ -219,3 +219,9 @@ You can also run adb shell from termux directly by following the guide found in 
   
 
 [https://www.youtube.com/watch?v=BHc7uvX34bM](https://www.youtube.com/watch?v=BHc7uvX34bM)
+
+---
+
+## Update Log
+
+- Version 1.0 : 
