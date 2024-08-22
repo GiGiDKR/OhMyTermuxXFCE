@@ -1,6 +1,22 @@
 #!/bin/bash
 
-clear
+bash_bannerr() {
+	clear
+	COLOR="\e[38;5;212m"
+
+	TOP_BORDER="╔════════════════════════════════════════╗"
+	BOTTOM_BORDER="╚════════════════════════════════════════╝"
+	EMPTY_LINE="║                                        ║"
+	TEXT_LINE="║              OHMYTERMUX                ║"
+	SUBTEXT_LINE="║                 XFCE                   ║"
+
+	echo -e "${COLOR}${TOP_BORDER}"
+	echo -e "${COLOR}${EMPTY_LINE}"
+	echo -e "${COLOR}${TEXT_LINE}"
+	echo -e "${COLOR}${SUBTEXT_LINE}"
+	echo -e "${COLOR}${EMPTY_LINE}"
+	echo -e "${COLOR}${BOTTOM_BORDER}\e[0m"
+}
 
 echo "Changer le répertoire de sources Termux ? (o/n)"
 read change_repo_choice
@@ -24,6 +40,7 @@ done
 # Fonction pour vérifier et installer gum
 check_and_install_gum() {
     if $USE_GUM && ! command -v gum &> /dev/null; then
+		   bash_banner
         echo "Installation de gum..."
         pkg update -y && pkg install gum -y
     fi
@@ -64,11 +81,10 @@ finish() {
 
 trap finish EXIT
 
-clear
 check_and_install_gum
 show_banner
 
-# Vérification et création du fichier colors.properties si nécessaire
+# Configuration du répértoire $HOME/.termux
 termux_dir="$HOME/.termux"
 file_path="$termux_dir/colors.properties"
 if [ ! -f "$file_path" ]; then
@@ -109,7 +125,6 @@ color17 = #db4b4b
 EOL
 fi
 
-# Configuration du fichier termux.properties
 file_path="$HOME/.termux/termux.properties"
 mkdir -p "$(dirname "$file_path")"
 if [ ! -f "$file_path" ]; then
@@ -127,7 +142,7 @@ else
     sed -i 's/^#\(fullscreen = true\)/\1/' "$file_path"
 fi
 
-# Suppression du fichier motd
+# Suppression du fichier motd avec sauvegarde
 MOTD_PATH="/data/data/com.termux/files/usr/etc/motd"
 MOTD_BACKUP_PATH="/data/data/com.termux/files/usr/etc/motd.bak"
 if [ -f "$MOTD_PATH" ]; then
@@ -136,7 +151,7 @@ else
     echo "Le fichier motd n'existe pas !"
 fi
 
-# Accorder l'accès au stockage externe
+# Accès au stockage externe
 show_banner
 if $USE_GUM; then
     gum confirm "Accorder l'accès au stockage externe ?" && termux-setup-storage
@@ -146,7 +161,7 @@ else
     [ "$choice" = "o" ] && termux-setup-storage
 fi
 
-# Menu pour choisir le shell
+# Menu de choix du shell
 show_banner
 if $USE_GUM; then
     shell_choice=$(gum choose --height=5 --header="Choisissez le shell à installer :" "bash" "zsh" "fish")
@@ -175,8 +190,6 @@ case $shell_choice in
             echo "Installation de ZSH..."
             pkg install -y zsh
         fi
-
-        # Menu interactif pour installer Oh My Zsh
         show_banner
         if $USE_GUM; then
             gum confirm "Voulez-vous installer Oh My Zsh ?" && {
@@ -196,7 +209,6 @@ case $shell_choice in
             fi
         fi
 
-        # Menu interactif pour installer PowerLevel10k
         show_banner
         if $USE_GUM; then
             gum confirm "Voulez-vous installer PowerLevel10k ?" && {
@@ -294,7 +306,7 @@ for PLUGIN in $PLUGINS; do
   esac
 done
 
-# Télécharger les fichiers de conf depuis GitHub
+# Télécharger les fichiers de configuration depuis GitHub
         show_banner
         if $USE_GUM; then
             gum spin --title "Téléchargement des fichiers de conf..." -- curl -fLo "$HOME/.oh-my-zsh/custom/aliases.zsh" https://raw.githubusercontent.com/GiGiDKR/OhMyTermuxXFCE/main/files/aliases.zsh
@@ -321,19 +333,17 @@ done
         ;;
 esac
 
-# Définir les répertoires
+# Définir et créer les répertoires
 TERMUX=$HOME/.termux
 CONFIG=$HOME/.config
 COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
 COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
 COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
 
-# Créer les répertoires
 mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
 
 # Téléchargement de la police et des thèmes
 show_banner
-
 if $USE_GUM; then
     gum spin --title "Téléchargement police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
     gum spin --title "Téléchargement des thèmes..." -- bash -c '
@@ -358,7 +368,7 @@ install_font() {
 
 show_banner
 
-# Menu interactif pour sélectionner une police à installer
+# Menu de séléction de police
 if $USE_GUM; then
     FONT=$(gum choose --height=20 --header="Sélectionner la police à installer :" "Police par défaut" "CaskaydiaCove Nerd Font" "FiraMono Nerd Font" "JetBrainsMono Nerd Font" "Mononoki Nerd Font" "VictorMono Nerd Font" "RobotoMono Nerd Font" "DejaVuSansMono Nerd Font" "UbuntuMono Nerd Font" "AnonymousPro Nerd Font" "Terminus Nerd Font")
 else
@@ -431,7 +441,7 @@ case $FONT in
         ;;
 esac
 
-# Menu interactif pour sélectionner les packages à installer
+# Menu de séléction des packages
 show_banner
 if $USE_GUM; then
     PACKAGES=$(gum choose --no-limit --height=13 --header="Sélectionner avec espace les packages à installer :" "nala" "eza" "bat" "lf" "fzf" "glow" "python" "lsd" "micro" "tsu" "Tout installer")
@@ -487,7 +497,7 @@ else
     echo "Aucun package sélectionné. Poursuite du script ..."
 fi
 
-# Confirmation pour installer OhMyTermuxXFCE
+# Installation de OhMyTermuxXFCE
 show_banner
 if $USE_GUM; then
     if gum confirm "    Installer OhMyTermux XFCE ?"; then
@@ -554,6 +564,7 @@ else
     pkg install "${pkgs[@]}" -y
 fi
 
+# Téléchargement et éxecution des scripts
 show_banner
 if $USE_GUM; then
     gum spin --title "Téléchargement des scripts" -- bash -c "
@@ -569,7 +580,6 @@ else
 fi
 chmod +x *.sh
 
-# Exécution des scripts avec ou sans gum
 show_banner
 if $USE_GUM; then
     ./xfce.sh "$username" --gum
@@ -580,6 +590,7 @@ else
 fi
 ./utils.sh
 
+# Installation de Termux-X11
 show_banner
 if $USE_GUM; then
     if gum confirm "Installer Termux-X11 ?"; then
@@ -602,6 +613,7 @@ else
     fi
 fi
 
+# Finalisation de la configuration
 source $PREFIX/etc/bash.bashrc
 termux-reload-settings
 
@@ -610,6 +622,7 @@ rm proot.sh
 rm utils.sh
 rm install.sh
 
+# Message final
 show_banner
 if $USE_GUM; then
     if gum confirm "    Exécuter OhMyTermux ?"; then
