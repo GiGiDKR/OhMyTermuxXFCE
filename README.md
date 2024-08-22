@@ -49,8 +49,9 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
 - [micro](https://github.com/zyedidia/micro)
 
 
-🧊 Shell selection: 
-- [Bash](https://git.savannah.gnu.org/cgit/bash.git/) (by default)
+🧊 Shell selection :
+
+- [Bash](https://git.savannah.gnu.org/cgit/bash.git/)
 - [ZSH](https://www.zsh.org/)
 - [Fish](https://github.com/fish-shell/fish-shell)
 
