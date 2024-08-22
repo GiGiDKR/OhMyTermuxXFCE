@@ -64,7 +64,7 @@ curl -sL https://raw.githubusercontent.com/GiGiDKR/Termux_XFCE/main/install.sh -
     - [zsh-abbr](https://github.com/olets/zsh-abbr)
     - [zsh-alias-finder](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/alias-finder)
 
-  🧊 Configuration Fish : 
+  🧊 Configuration Fish [^1] : 
   
    - [Oh-My-Fish](https://github.com/oh-my-fish/oh-my-fish)
    - [Fisher](https://github.com/jorgebucaran/fisher)
