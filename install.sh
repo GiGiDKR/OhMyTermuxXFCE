@@ -347,26 +347,39 @@ select_plugins
         ;;
 esac
 
-# Définir et créer les répertoires
-TERMUX=$HOME/.termux
-CONFIG=$HOME/.config
-COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
-COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
-COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
-
-mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
-
-# Téléchargement des thèmes
+# Installation de thèmes
 show_banner
 if $USE_GUM; then
-    gum spin --title "Téléchargement des thèmes..." -- bash -c '
-        curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip &&
-        unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
-    '
+    if gum confirm "Installer des thèmes Termux ?"; then
+        # Définir et créer les répertoires
+        CONFIG=$HOME/.config
+        COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
+        COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
+        COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
+
+        mkdir -p $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
+
+        gum spin --title "Installation des thèmes" -- bash -c '
+            curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip &&
+            unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+        '
+    fi
 else
-    echo "Téléchargement des thèmes..."
-    curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
-    unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+    echo "Installer des thèmes Termux ? (o/n)"
+    read choice
+    if [ "$choice" = "o" ]; then
+        # Définir et créer les répertoires
+        CONFIG=$HOME/.config
+        COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
+        COLORS_DIR_TERMUX=$HOME/.termux/colors/termux
+        COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
+
+        mkdir -p $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
+
+        echo "Installation des thèmes..."
+        curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
+        unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
+    fi
 fi
 
 rm "$HOME/.termux/colors.zip"
