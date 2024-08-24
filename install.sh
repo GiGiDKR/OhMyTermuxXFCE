@@ -350,7 +350,7 @@ esac
 # Installation de thèmes
 show_banner
 if $USE_GUM; then
-    if gum confirm "Installer des thèmes Termux ?"; then
+    if gum confirm "Installer des thèmes pour Termux ?"; then
         # Définir et créer les répertoires
         CONFIG=$HOME/.config
         COLORS_DIR_TERMUXSTYLE=$HOME/.termux/colors/termuxstyle
@@ -365,7 +365,7 @@ if $USE_GUM; then
         '
     fi
 else
-    echo "Installer des thèmes Termux ? (o/n)"
+    echo "Installer des thèmes pour Termux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
         # Définir et créer les répertoires
