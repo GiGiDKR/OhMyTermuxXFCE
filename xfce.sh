@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# Fonction pour afficher la bannière sans gum
+bash_banner() {
+    clear
+    COLOR="\e[38;5;212m"
+
+    TOP_BORDER="╔════════════════════════════════════════╗"
+    BOTTOM_BORDER="╚════════════════════════════════════════╝"
+    EMPTY_LINE="║                                        ║"
+    TEXT_LINE="║              OHMYTERMUX                ║"
+    SUBTEXT_LINE="║                 XFCE                   ║"
+
+    echo
+    echo -e "${COLOR}${TOP_BORDER}"
+    echo -e "${COLOR}${EMPTY_LINE}"
+    echo -e "${COLOR}${TEXT_LINE}"
+    echo -e "${COLOR}${SUBTEXT_LINE}"
+    echo -e "${COLOR}${EMPTY_LINE}"
+    echo -e "${COLOR}${BOTTOM_BORDER}\e[0m"
+    echo
+}
+
 # Fonction pour afficher la bannière avec ou sans gum
 show_banner() {
     clear
@@ -14,8 +35,7 @@ show_banner() {
             "OHMYTERMUX" \
             "XFCE"
     else
-        echo "OHMYTERMUX - XFCE"
-        echo ""
+        bash_banner
     fi
 }
 
@@ -25,8 +45,8 @@ clear
 show_banner
 if ! command -v gum &> /dev/null; then
     echo "Installation de gum..."
-    pkg update -y
-    pkg install -y gum
+    pkg update -y > /dev/null 2>&1
+    pkg install -y gum > /dev/null 2>&1
 fi
 
 username="$1"
@@ -37,16 +57,18 @@ pkgs=('git' 'virglrenderer-android' 'papirus-icon-theme' 'xfce4' 'xfce4-goodies'
 # Installation des paquets nécessaires
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y
+    gum spin --title "Installation des paquets nécessaires" -- pkg install "${pkgs[@]}" -y > /dev/null 2>&1
 else
     echo "Installation des paquets nécessaires..."
-    pkg install "${pkgs[@]}" -y
+    pkg install "${pkgs[@]}" -y > /dev/null 2>&1
 fi
 
 # Placer l'icône de Firefox sur le bureau
 show_banner
-cp $PREFIX/share/applications/firefox.desktop $HOME/Desktop 
-chmod +x $HOME/Desktop/firefox.desktop
+{
+    cp $PREFIX/share/applications/firefox.desktop $HOME/Desktop
+    chmod +x $HOME/Desktop/firefox.desktop
+} > /dev/null 2>&1
 
 # Définir les alias
 show_banner
@@ -88,48 +110,54 @@ alias bashconfig='nano $PREFIX/etc/bash.bashrc'
 # Téléchargement de l'image de fond
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png
+    gum spin --title "Téléchargement du fond d'écran" -- wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png > /dev/null 2>&1
 else
     echo "Téléchargement du fond d'écran..."
-    wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png
+    wget https://raw.githubusercontent.com/GiGIDKR/OhMyTermuxXFCE/main/files/mac_waves.png > /dev/null 2>&1
 fi
-mv mac_waves.png $PREFIX/share/backgrounds/xfce/
+mv mac_waves.png $PREFIX/share/backgrounds/xfce/ > /dev/null 2>&1
 
 # Installation du thème WhiteSur-Dark
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Installation du thème WhiteSur-Dark" -- wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2024-05-01.zip
+    gum spin --title "Installation du thème WhiteSur-Dark" -- wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2024-05-01.zip > /dev/null 2>&1
 else
     echo "Installation du thème WhiteSur-Dark..."
-    wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2024-05-01.zip
+    wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2024-05-01.zip > /dev/null 2>&1
 fi
-unzip 2024-05-01.zip
-tar -xf WhiteSur-gtk-theme-2024-05-01/release/WhiteSur-Dark.tar.xz
-mv WhiteSur-Dark/ $PREFIX/share/themes/
-rm -rf WhiteSur*
-rm 2024-05-01.zip
+{
+    unzip 2024-05-01.zip
+    tar -xf WhiteSur-gtk-theme-2024-05-01/release/WhiteSur-Dark.tar.xz
+    mv WhiteSur-Dark/ $PREFIX/share/themes/
+    rm -rf WhiteSur*
+    rm 2024-05-01.zip
+} > /dev/null 2>&1
 
 # Installation du thème d'icônes Fluent Cursor
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Installation du thème Fluent Cursor" -- wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2024-02-25.zip
+    gum spin --title "Installation du thème Fluent Cursor" -- wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2024-02-25.zip > /dev/null 2>&1
 else
     echo "Installation du thème Fluent Cursor..."
-    wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2024-02-25.zip
+    wget https://github.com/vinceliuice/Fluent-icon-theme/archive/refs/tags/2024-02-25.zip > /dev/null 2>&1
 fi
-unzip 2024-02-25.zip
-mv Fluent-icon-theme-2024-02-25/cursors/dist $PREFIX/share/icons/
-mv Fluent-icon-theme-2024-02-25/cursors/dist-dark $PREFIX/share/icons/
-rm -rf $HOME/Fluent*
-rm 2024-02-25.zip
+{
+    unzip 2024-02-25.zip
+    mv Fluent-icon-theme-2024-02-25/cursors/dist $PREFIX/share/icons/
+    mv Fluent-icon-theme-2024-02-25/cursors/dist-dark $PREFIX/share/icons/
+    rm -rf $HOME/Fluent*
+    rm 2024-02-25.zip
+} > /dev/null 2>&1
 
 # Configuration
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip
+    gum spin --title "Installation des fichiers de configuration" -- wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip > /dev/null 2>&1
 else
     echo "Installation des fichiers de configuration..."
-    wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip
+    wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/files/config.zip > /dev/null 2>&1
 fi
-unzip config.zip
-rm config.zip
+{
+    unzip config.zip
+    rm config.zip
+} > /dev/null 2>&1
