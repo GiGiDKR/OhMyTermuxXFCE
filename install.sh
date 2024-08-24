@@ -129,6 +129,13 @@ color17 = #db4b4b
 EOL
 fi
 
+if $USE_GUM; then
+    gum spin --title "Téléchargement police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
+else
+    echo "Téléchargement police par défaut..."
+    curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
+fi
+
 file_path="$termux_dir/termux.properties"
 
 if [ ! -f "$file_path" ]; then
@@ -153,6 +160,8 @@ if [ -f "$MOTD_PATH" ]; then
 else
     echo "Le fichier motd n'existe pas !"
 fi
+
+termux-reload-settings
 
 # Accès au stockage externe
 show_banner
@@ -347,17 +356,14 @@ COLORS_DIR_XFCE4TERMINAL=$HOME/.termux/colors/xfce4terminal
 
 mkdir -p $TERMUX $CONFIG $COLORS_DIR_TERMUXSTYLE $COLORS_DIR_TERMUX $COLORS_DIR_XFCE4TERMINAL
 
-# Téléchargement de la police et des thèmes
+# Téléchargement des thèmes
 show_banner
 if $USE_GUM; then
-    gum spin --title "Téléchargement police par défaut..." -- curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
     gum spin --title "Téléchargement des thèmes..." -- bash -c '
         curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip &&
         unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
     '
 else
-    echo "Téléchargement police par défaut..."
-    curl -L -o $HOME/.termux/font.ttf https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/font.ttf
     echo "Téléchargement des thèmes..."
     curl -L -o $HOME/.termux/colors.zip https://github.com/GiGiDKR/OhMyTermuxXFCE/raw/main/files/colors.zip
     unzip -o "$HOME/.termux/colors.zip" -d "$HOME/.termux/"
