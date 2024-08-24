@@ -533,7 +533,7 @@ if $USE_GUM; then
         username=$(gum input --placeholder "Entrez votre nom d'utilisateur")
     else
         show_banner
-        if gum confirm "     Exécuter OhMyTermux ?"; then
+        if gum confirm "      Exécuter OhMyTermux ?"; then
             termux-reload-settings
             clear
             exec $shell_choice
@@ -544,14 +544,14 @@ if $USE_GUM; then
         exit 0
     fi
 else
-    echo "Installer OhMyTermux XFCE ? (o/n)"
+    echo "    Installer OhMyTermux XFCE ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
         # Demande du nom d'utilisateur avec read
         read -p "Entrez votre nom d'utilisateur : " username
     else
         show_banner
-        echo "Exécuter OhMyTermux ? (o/n)"
+        echo "      Exécuter OhMyTermux ? (o/n)"
         read choice
         if [ "$choice" = "o" ]; then
             termux-reload-settings
@@ -653,14 +653,14 @@ rm install.sh
 # Message final
 show_banner
 if $USE_GUM; then
-    if gum confirm "    Exécuter OhMyTermux ?"; then
+    if gum confirm "      Exécuter OhMyTermux ?"; then
         clear
         exec $shell_choice
     else
         echo "OhMyTermux sera actif au prochain démarrage de Termux."
     fi
 else
-    echo "Exécuter OhMyTermux ? (o/n)"
+    echo "      Exécuter OhMyTermux ? (o/n)"
     read choice
     if [ "$choice" = "o" ]; then
         clear
