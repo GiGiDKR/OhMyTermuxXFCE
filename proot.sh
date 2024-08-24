@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# Fonction pour afficher la bannière sans gum
+bash_banner() {
+        clear
+        COLOR="\e[38;5;212m"
+
+        TOP_BORDER="╔════════════════════════════════════════╗"
+        BOTTOM_BORDER="╚════════════════════════════════════════╝"
+        EMPTY_LINE="║                                        ║"
+        TEXT_LINE="║              OHMYTERMUX                ║"
+        SUBTEXT_LINE="║                 XFCE                   ║"
+
+        echo
+        echo -e "${COLOR}${TOP_BORDER}"
+        echo -e "${COLOR}${EMPTY_LINE}"
+        echo -e "${COLOR}${TEXT_LINE}"
+        echo -e "${COLOR}${SUBTEXT_LINE}"
+        echo -e "${COLOR}${EMPTY_LINE}"
+        echo -e "${COLOR}${BOTTOM_BORDER}\e[0m"
+        echo
+}
+
 # Fonction pour afficher la bannière avec ou sans gum
 show_banner() {
     clear
@@ -14,8 +35,7 @@ show_banner() {
             "OHMYTERMUX" \
             "XFCE"
     else
-        echo "OHMYTERMUX - XFCE"
-        echo ""
+        bash_banner
     fi
 }
 
@@ -34,11 +54,11 @@ finish() {
   if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
     echo
     if command -v gum &> /dev/null; then
-        gum style --foreground 196 "ERREUR: Failed to setup XFCE on Termux."
+        gum style --foreground 196 "ERREUR: Échec de l'installation de XFCE sur Termux."
     else
-        echo "ERREUR: Failed to setup XFCE on Termux."
+        echo "ERREUR: Échec de l'installation de XFCE sur Termux."
     fi
-    echo "Please refer to the error message(s) above"
+    echo "Veuillez vous référer aux messages d'erreur ci-dessus "
   fi
 }
 
@@ -48,7 +68,7 @@ username="$1"
 
 pkgs_proot=('sudo' 'wget' 'nala' 'jq')
 
-# Vérifier si gum est installé et utiliser echo si ce n'est pas le cas
+# Installation de Debian
 show_banner
 if command -v gum &> /dev/null; then
     gum spin --title "Installation de Debian proot" -- pd install debian > /dev/null 2>&1
@@ -96,13 +116,13 @@ fi
 # Ajout de l'utilisateur à sudoers
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Ajout à sudoers" -- {
+    gum spin --title "Ajout des droits utilisateur" -- {
         chmod u+rw $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
         echo "$username ALL=(ALL) NOPASSWD:ALL" | tee -a $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers > /dev/null
         chmod u-w $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
     } > /dev/null 2>&1
 else
-    echo "Ajout à sudoers..."
+    echo "Ajout des droits utilisateur..."
     {
         chmod u+rw $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers
         echo "$username ALL=(ALL) NOPASSWD:ALL" | tee -a $PREFIX/var/lib/proot-distro/installed-rootfs/debian/etc/sudoers > /dev/null
@@ -149,7 +169,7 @@ alias bashconfig='nano $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home
 
 # Configuration du fuseau horaire proot
 show_banner
-echo "Configuration du fuseau horaire proot..."
+echo "Configuration du fuseau horaire..."
 timezone=$(getprop persist.sys.timezone)
 {
     pd login debian --shared-tmp -- env DISPLAY=:1.0 rm /etc/localtime
@@ -158,7 +178,7 @@ timezone=$(getprop persist.sys.timezone)
 
 # Application du thème de xfce à proot
 show_banner
-echo "Application du thème de xfce à proot..."
+echo "Application du thème XFCE..."
 cd $PREFIX/share/icons
 find dist-dark | cpio -pdm $PREFIX/var/lib/proot-distro/installed-rootfs/debian/usr/share/icons > /dev/null 2>&1
 
@@ -172,9 +192,9 @@ mkdir -p $PREFIX/var/lib/proot-distro/installed-rootfs/debian/home/$username/.th
 # Configuration de l'accélération matérielle
 show_banner
 if command -v gum &> /dev/null; then
-    gum spin --title "Téléchargement de mesa-vulkan-kgsl" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb > /dev/null 2>&1
+    gum spin --title "Téléchargement de Mesa-Vulkan" -- pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb > /dev/null 2>&1
 else
-    echo "Téléchargement de mesa-vulkan-kgsl..."
+    echo "Téléchargement de Mesa-Vulkan..."
     pd login debian --shared-tmp -- env DISPLAY=:1.0 wget https://github.com/GiGIDKR/OhMyTermuxXFCE/raw/main/mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb > /dev/null 2>&1
 fi
 pd login debian --shared-tmp -- env DISPLAY=:1.0 sudo apt install -y ./mesa-vulkan-kgsl_24.1.0-devel-20240120_arm64.deb > /dev/null 2>&1
