@@ -129,10 +129,9 @@ color17 = #db4b4b
 EOL
 fi
 
-file_path="$HOME/.termux/termux.properties"
-mkdir -p "$(dirname "$file_path")"
+file_path="$termux_dir/termux.properties"
+
 if [ ! -f "$file_path" ]; then
-    echo "Le fichier $file_path n'existe pas.... Création du fichier avec le contenu par défaut."
     cat <<EOL > "$file_path"
 allow-external-apps = true
 use-black-ui = true
@@ -140,13 +139,13 @@ bell-character = ignore
 fullscreen = true
 EOL
 else
-    sed -i 's/^#\(allow-external-apps = true\)/\1/' "$file_path"
-    sed -i 's/^#\(use-black-ui = true\)/\1/' "$file_path"
-    sed -i 's/^#\(bell-character = ignore\)/\1/' "$file_path"
-    sed -i 's/^#\(fullscreen = true\)/\1/' "$file_path"
+    sed -i 's/^# allow-external-apps = true/allow-external-apps = true/' "$file_path"
+    sed -i 's/^# use-black-ui = true/use-black-ui = true/' "$file_path"
+    sed -i 's/^# bell-character = ignore/bell-character = ignore/' "$file_path"
+    sed -i 's/^# fullscreen = true/fullscreen = true/' "$file_path"
 fi
 
-# Suppression du fichier motd avec sauvegarde
+# Suppression du fichier motd après sauvegarde
 MOTD_PATH="/data/data/com.termux/files/usr/etc/motd"
 MOTD_BACKUP_PATH="/data/data/com.termux/files/usr/etc/motd.bak"
 if [ -f "$MOTD_PATH" ]; then
@@ -158,9 +157,9 @@ fi
 # Accès au stockage externe
 show_banner
 if $USE_GUM; then
-    gum confirm "Accorder l'accès au stockage externe ?" && termux-setup-storage
+    gum confirm "Autoriser l'accès au stockage ?" && termux-setup-storage
 else
-    echo "Accorder l'accès au stockage externe ? (o/n)"
+    echo "Autoriser l'accès au stockage ? (o/n)"
     read choice
     [ "$choice" = "o" ] && termux-setup-storage
 fi
