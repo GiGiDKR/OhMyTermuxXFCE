@@ -310,6 +310,8 @@ for PLUGIN in $PLUGINS; do
   esac
 done
 
+select_plugins
+
 # Télécharger les fichiers de configuration depuis GitHub
         show_banner
         if $USE_GUM; then
