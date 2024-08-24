@@ -249,7 +249,7 @@ case $shell_choice in
 show_banner
 select_plugins() {
     if $USE_GUM; then
-        PLUGINS=$(gum choose --no-limit --header="Sélectionner avec espace les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
+        PLUGINS=$(gum choose --no-limit --header="Sélectionner avec ESPACE les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
     else
         echo "Sélectionner les plugins à installer (séparés par des espaces) :"
         echo "1) zsh-autosuggestions"
