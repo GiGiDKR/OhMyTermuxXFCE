@@ -49,17 +49,18 @@ if ! command -v gum &> /dev/null; then
     pkg install -y gum > /dev/null 2>&1
 fi
 
+# Fonction de fin pour gérer les erreurs
 finish() {
-  local ret=$?
-  if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
-    echo
-    if command -v gum &> /dev/null; then
-        gum style --foreground 196 "ERREUR: Échec de l'installation de XFCE sur Termux."
-    else
-        echo "ERREUR: Échec de l'installation de XFCE sur Termux."
+    local ret=$?
+    if [ ${ret} -ne 0 ] && [ ${ret} -ne 130 ]; then
+        echo
+        if $USE_GUM; then
+            gum style --foreground 196 "ERREUR: Installation de XFCE dans Termux impossible."
+        else
+            echo "ERREUR: Installation de XFCE dans Termux impossible."
+        fi
+        echo "Veuillez vous référer au(x) message(s) d'erreur ci-dessus."
     fi
-    echo "Veuillez vous référer aux messages d'erreur ci-dessus "
-  fi
 }
 
 trap finish EXIT
