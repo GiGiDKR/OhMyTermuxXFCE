@@ -23,7 +23,7 @@ bash_banner() {
 
 bash_banner
 
-echo "Changer le répertoire de sources Termux ? (o/n)"
+echo "Changer le répertoire de sources ? (o/n)"
 read change_repo_choice
 if [ "$change_repo_choice" = "o" ]; then
     termux-change-repo
