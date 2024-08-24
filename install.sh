@@ -253,8 +253,9 @@ case $shell_choice in
             fi
         fi
 
-# Installation des plugins
 show_banner
+
+# Fonction de sélection des plugins
 select_plugins() {
     if $USE_GUM; then
         PLUGINS=$(gum choose --no-limit --header="Sélectionner avec ESPACE les plugins à installer :" "zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "you-should-use" "zsh-abbr" "zsh-alias-finder" "Tout installer")
@@ -284,12 +285,17 @@ select_plugins() {
     fi
 }
 
+# Appel de la fonction pour sélectionner les plugins
+select_plugins
+
+# Vérification des plugins sélectionnés
 if [[ "$PLUGINS" == *"Tout installer"* ]]; then
   PLUGINS="zsh-autosuggestions zsh-syntax-highlighting zsh-completions you-should-use zsh-abbr zsh-alias-finder"
 fi
 
+# Installation des plugins
 for PLUGIN in $PLUGINS; do
-  if $use_gum; then
+  if $USE_GUM; then
     gum spin --title "Installation de $PLUGIN..." -- sleep 2
   else
     echo "Installation de $PLUGIN..."
@@ -317,8 +323,6 @@ for PLUGIN in $PLUGINS; do
       ;;
   esac
 done
-
-select_plugins
 
 # Télécharger les fichiers de configuration depuis GitHub
         show_banner
